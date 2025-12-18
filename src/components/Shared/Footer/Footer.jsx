@@ -14,7 +14,7 @@ import Logo from "../../common/Logo/Logo";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center bg-neutral text-neutral-content py-10 mt-20">
+    <footer className="footer footer-center bg-neutral text-neutral-content py-10">
       <div className="main-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left w-full">
           <div className="space-y-4">
