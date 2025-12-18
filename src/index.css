@@ -1,1 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@plugin "daisyui";
+
+/* Light Theme */
+@plugin "daisyui/theme" {
+  name: "localchef-light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: oklch(98% 0.01 60);
+  --color-base-200: oklch(95% 0.01 60);
+  --color-base-300: oklch(92% 0.02 60);
+  --color-base-content: oklch(25% 0.02 60);
+  --color-primary: oklch(55% 0.22 25);
+  --color-primary-content: oklch(98% 0.01 60);
+  --color-secondary: oklch(45% 0.12 145);
+  --color-secondary-content: oklch(98% 0.01 145);
+  --color-accent: oklch(75% 0.18 80);
+  --color-accent-content: oklch(25% 0.02 80);
+  --color-neutral: oklch(35% 0.02 60);
+  --color-neutral-content: oklch(98% 0.01 60);
+  --color-info: oklch(65% 0.19 240);
+  --color-info-content: oklch(98% 0.01 240);
+  --color-success: oklch(65% 0.2 145);
+  --color-success-content: oklch(98% 0.01 145);
+  --color-warning: oklch(80% 0.18 85);
+  --color-warning-content: oklch(25% 0.05 85);
+  --color-error: oklch(60% 0.22 25);
+  --color-error-content: oklch(98% 0.01 25);
+
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+/* Dark Theme */
+@plugin "daisyui/theme" {
+  name: "localchef-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-base-100: oklch(20% 0.02 60);
+  --color-base-200: oklch(25% 0.02 60);
+  --color-base-300: oklch(30% 0.02 60);
+  --color-base-content: oklch(92% 0.01 60);
+  --color-primary: oklch(60% 0.22 25);
+  --color-primary-content: oklch(98% 0.01 60);
+  --color-secondary: oklch(55% 0.12 145);
+  --color-secondary-content: oklch(98% 0.01 145);
+  --color-accent: oklch(75% 0.18 80);
+  --color-accent-content: oklch(20% 0.02 80);
+  --color-neutral: oklch(50% 0.02 60);
+  --color-neutral-content: oklch(98% 0.01 60);
+  --color-info: oklch(70% 0.17 240);
+  --color-info-content: oklch(20% 0.02 240);
+  --color-success: oklch(70% 0.18 145);
+  --color-success-content: oklch(20% 0.02 145);
+  --color-warning: oklch(80% 0.16 85);
+  --color-warning-content: oklch(20% 0.05 85);
+  --color-error: oklch(65% 0.2 25);
+  --color-error-content: oklch(98% 0.01 25);
+
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@layer base {
+  .main-container {
+    @apply max-w-370 px-3! md:px-5! mx-auto;
+  }
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+}
+
+.hero-section {
+  background: linear-gradient(
+    135deg,
+    oklch(55% 0.22 25 / 0.1),
+    oklch(98% 0.01 60),
+    oklch(75% 0.18 80 / 0.1)
+  );
+}
+
+[data-theme="localchef-dark"] .hero-section {
+  background: linear-gradient(
+    135deg,
+    oklch(60% 0.22 25 / 0.15),
+    oklch(20% 0.02 60),
+    oklch(75% 0.18 80 / 0.1)
+  );
+}
+
+.card-elevated {
+  box-shadow: 0 4px 20px -4px oklch(25% 0.02 60 / 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-elevated:hover {
+  box-shadow: 0 12px 32px -8px oklch(25% 0.02 60 / 0.15);
+  transform: translateY(-4px);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, oklch(55% 0.22 25), oklch(75% 0.18 80));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-shine:hover::after {
+  left: 100%;
+}
+
+.font-display {
+  font-family: "Playfair Display", serif;
+}
+
+.font-body {
+  font-family: "DM Sans", sans-serif;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
