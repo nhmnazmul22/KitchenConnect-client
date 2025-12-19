@@ -1,25 +1,24 @@
-import React from "react";
-
 const Input = ({
   icon,
   placeholder = "",
   type = "text",
-  inputClassNames,
+  inputClassNames = "",
+  labelClassNames = "",
   ...props
 }) => {
   return (
-    <div
-      className="flex items-center bg-white border border-base-300 focus-within:border-primary focus-within:ring-2
-            ring-offset-2 ring-primary transition-all duration-300 px-2 rounded-lg"
+    <label
+      className={`input flex items-center gap-2 w-full focus-within:outline-none
+              focus-within:border-neutral-300 focus-within:shadow-sm ${labelClassNames}`}
     >
       {icon && <span className="">{icon}</span>}
       <input
         type={type}
         placeholder={placeholder}
-        className={`input input-bordered w-full border-0 bg-transparent focus-within:outline-0 shadow-none ${inputClassNames}`}
+        className={`grow ${inputClassNames}`}
         {...props}
       />
-    </div>
+    </label>
   );
 };
 

@@ -4,6 +4,9 @@ import HomePage from "../pages/Home";
 import MealsPage from "../pages/Meals";
 import NotFound from "../pages/Errors/NotFound";
 import MealDetailsPage from "../pages/MealsDetails";
+import LoginPage from "../pages/Auth/Login/Login";
+import AuthLayout from "../layout/AuthLayout";
+import RegisterPage from "../pages/Auth/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -22,14 +25,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <div>Auth Layout</div>,
+    element: <AuthLayout></AuthLayout>,
     children: [
       {
         index: true,
         element: <Navigate to="/auth/login" />,
       },
-      { path: "login", element: <div>Login Page</div> },
-      { path: "register", element: <div>Register Page</div> },
+      { path: "login", element: <LoginPage></LoginPage> },
+      { path: "register", element: <RegisterPage></RegisterPage> },
     ],
   },
   {

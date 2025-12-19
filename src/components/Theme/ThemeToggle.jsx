@@ -1,7 +1,6 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
-
 const getInitialTheme = () => {
   if (typeof window === "undefined") return "localchef-light";
 

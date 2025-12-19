@@ -47,7 +47,10 @@ const Navbar = () => {
                 >
                   <Heart className="w-5 h-5" />
                 </Link>
-                <Link to="/orders" className="btn btn-ghost btn-circle btn-sm">
+                <Link
+                  to="/dashboard/orders"
+                  className="btn btn-ghost btn-circle btn-sm"
+                >
                   <ShoppingBag className="w-5 h-5" />
                 </Link>
                 <div className="dropdown dropdown-end">
@@ -88,11 +91,11 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to="/login" className="btn btn-ghost btn-md">
+                <Link to="/auth/login" className="btn btn-ghost btn-md">
                   Login
                 </Link>
                 <Link
-                  to="/register"
+                  to="/auth/register"
                   className="btn btn-primary btn-md btn-shine"
                 >
                   Register
