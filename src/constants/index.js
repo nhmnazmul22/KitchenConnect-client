@@ -4,11 +4,9 @@ import {
   Twitter,
   Users,
   Youtube,
-  ArrowRight,
   Utensils,
   Clock,
   Shield,
-  Star,
   ChefHat,
   TrendingUp,
 } from "lucide-react";

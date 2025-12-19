@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import Logo from "../../../components/common/Logo/Logo";
 import Input from "../../../components/common/UI/Input";
+import Textarea from "../../../components/common/UI/TextArea";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -150,10 +151,7 @@ const RegisterPage = () => {
 
             <div className="form-control">
               <label className="label">Address</label>
-              <textarea
-                placeholder="Enter your delivery address"
-                className="textarea mt-2 min-h-30 w-full focus-within:outline-0 focus-within:border-neutral-300"
-              />
+              <Textarea placeholder="Enter your delivery address"></Textarea>
             </div>
 
             <div className="form-control">

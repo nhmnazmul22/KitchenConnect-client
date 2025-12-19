@@ -7,6 +7,7 @@ import MealDetailsPage from "../pages/MealsDetails";
 import LoginPage from "../pages/Auth/Login/Login";
 import AuthLayout from "../layout/AuthLayout";
 import RegisterPage from "../pages/Auth/Register/Register";
+import CreateOrderPage from "../pages/CreateOrder";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       },
       { path: "/meals", element: <MealsPage></MealsPage> },
       { path: "/meals/:id", element: <MealDetailsPage></MealDetailsPage> },
-      { path: "/create-order", element: <div>Create Order page</div> },
+      { path: "/create-order", element: <CreateOrderPage></CreateOrderPage> },
       { path: "*", element: <NotFound></NotFound> },
     ],
   },

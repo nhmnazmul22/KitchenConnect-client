@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Stars from "../../../components/common/UI/Stars";
 import { motion } from "motion/react";
+import { Link } from "react-router";
 
 const MealInfo = ({ meal, mealReviews }) => {
   return (
@@ -89,10 +90,12 @@ const MealInfo = ({ meal, mealReviews }) => {
             <Heart className="w-4 h-4 mr-2" />
             Favorite
           </button>
-          <button className="btn btn-primary btn-shine">
-            <ShoppingCart className="w-4 h-4 mr-2" />
-            Order Now
-          </button>
+          <Link to="/create-order">
+            <button className="btn btn-primary btn-shine">
+              <ShoppingCart className="w-4 h-4 mr-2" />
+              Order Now
+            </button>
+          </Link>
         </div>
       </div>
     </motion.div>
