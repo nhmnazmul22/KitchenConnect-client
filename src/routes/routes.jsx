@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import HomePage from "../pages/Home";
+import MealsPage from "../pages/Meals";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
         index: true,
         element: <HomePage></HomePage>,
       },
-      { path: "/meals", element: <div>Meals page</div> },
+      { path: "/meals", element: <MealsPage></MealsPage> },
       { path: "/meals/:id", element: <div>Meals details page</div> },
       { path: "/create-order", element: <div>Create Order page</div> },
     ],
