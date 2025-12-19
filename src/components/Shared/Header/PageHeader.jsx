@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 const PageHeader = ({ title, gradientTitle, subTitle }) => {
   return (
-    <section className="hero-section py-12 md:pt-28 md:pb-16">
+    <section className="hero-section pt-28 pb-12 md:pb-16">
       <div className="main-container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

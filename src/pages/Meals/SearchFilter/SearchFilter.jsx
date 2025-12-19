@@ -5,7 +5,7 @@ import Input from "../../../components/common/UI/Input";
 const SearchFilter = () => {
   return (
     <section className="py-6 border-b border-base-300 bg-base-100/95">
-      <div className="container mx-auto px-4">
+      <div className="main-container mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="form-control w-full md:w-96">
             <Input
@@ -13,7 +13,7 @@ const SearchFilter = () => {
               placeholder="Search for meals, chefs, or cuisines..."
             ></Input>
           </div>
-          <div className="flex gap-3 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <Select
               label="Sort by"
               options={[
@@ -34,10 +34,6 @@ const SearchFilter = () => {
                 "Japanese",
               ]}
             ></Select>
-
-            <button className="btn btn-square btn-outline">
-              <SlidersHorizontal className="w-4 h-4" />
-            </button>
           </div>
         </div>
       </div>
