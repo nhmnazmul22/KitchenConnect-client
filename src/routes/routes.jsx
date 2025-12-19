@@ -2,6 +2,8 @@ import { createBrowserRouter, Navigate } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import HomePage from "../pages/Home";
 import MealsPage from "../pages/Meals";
+import NotFound from "../pages/Errors/NotFound";
+import MealDetailsPage from "../pages/MealsDetails";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +15,9 @@ const router = createBrowserRouter([
         element: <HomePage></HomePage>,
       },
       { path: "/meals", element: <MealsPage></MealsPage> },
-      { path: "/meals/:id", element: <div>Meals details page</div> },
+      { path: "/meals/:id", element: <MealDetailsPage></MealDetailsPage> },
       { path: "/create-order", element: <div>Create Order page</div> },
+      { path: "*", element: <NotFound></NotFound> },
     ],
   },
   {
@@ -49,7 +52,7 @@ const router = createBrowserRouter([
       { path: "statistics", element: <div>statistics</div> },
     ],
   },
-  { path: "*", element: <div>Error Page</div> },
+  { path: "*", element: <NotFound></NotFound> },
 ]);
 
 export default router;
