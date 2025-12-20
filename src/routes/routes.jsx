@@ -9,7 +9,7 @@ import AuthLayout from "../layout/AuthLayout";
 import RegisterPage from "../pages/Auth/Register/Register";
 import CreateOrderPage from "../pages/CreateOrder";
 import DashboardLayout from "../layout/DashboardLayout";
-import ProfilePage from "../pages/Dashboard/User/Profile/Profle";
+import ProfilePage from "../pages/Dashboard/User/Profile/Profile";
 import OrdersPage from "../pages/Dashboard/User/Orders/Orders";
 import ReviewsPage from "../pages/Dashboard/User/Reviews/Reviews";
 import FavoritesPage from "../pages/Dashboard/User/Favorite/Favorite";
