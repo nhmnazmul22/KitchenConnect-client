@@ -9,12 +9,21 @@ import {
   Shield,
   ChefHat,
   TrendingUp,
+  User,
+  ShoppingBag,
+  Star,
+  Heart,
+  UtensilsCrossed,
+  ClipboardList,
+  FileCheck,
+  BarChart3,
 } from "lucide-react";
 
 export const navLinks = [
   { name: "Home", path: "/" },
   { name: "Meals", path: "/meals" },
   { name: "Dashboard", path: "/dashboard" },
+  { name: "Profile", path: "/dashboard/profile" },
 ];
 
 export const socialLinks = [
@@ -57,6 +66,35 @@ export const stats = [
   { icon: Utensils, value: "50,000+", label: "Meals Delivered" },
   { icon: TrendingUp, value: "4.9", label: "Average Rating" },
 ];
+
+export const dashboardMenuItems = {
+  user: [
+    { icon: User, label: "My Profile", path: "/dashboard/profile" },
+    { icon: ShoppingBag, label: "My Orders", path: "/dashboard/orders" },
+    { icon: Star, label: "My Reviews", path: "/dashboard/reviews" },
+    { icon: Heart, label: "Favorites", path: "/dashboard/favorites" },
+  ],
+  chef: [
+    { icon: User, label: "My Profile", path: "/dashboard/profile" },
+    {
+      icon: UtensilsCrossed,
+      label: "Create Meal",
+      path: "/dashboard/create-meal",
+    },
+    { icon: ChefHat, label: "My Meals", path: "/dashboard/my-meals" },
+    {
+      icon: ClipboardList,
+      label: "Order Requests",
+      path: "/dashboard/order-requests",
+    },
+  ],
+  admin: [
+    { icon: User, label: "My Profile", path: "/dashboard/profile" },
+    { icon: Users, label: "Manage Users", path: "/dashboard/users" },
+    { icon: FileCheck, label: "Role Requests", path: "/dashboard/requests" },
+    { icon: BarChart3, label: "Statistics", path: "/dashboard/statistics" },
+  ],
+};
 
 // Static mock data for LocalChefBazaar
 export const meals = [
