@@ -11,7 +11,7 @@ const Navbar = () => {
   const isLoggedIn = false;
 
   return (
-    <div className="bg-base-100/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-base-300">
+    <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-300 fixed top-0 left-0 right-0 z-50 ">
       <div className="navbar main-container">
         <div className="navbar-start">
           <Logo></Logo>
