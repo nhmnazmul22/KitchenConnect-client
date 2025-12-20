@@ -3,6 +3,7 @@ import ReviewCard from "../../../../components/Reviews/ReviewCard";
 import WriteReviewModal from "../../../../components/Reviews/WriteReviewModal";
 import { reviews } from "../../../../constants";
 import { Edit2, Trash2 } from "lucide-react";
+import DashboardPageHeader from "../../../../components/Shared/Header/DashboardPageHeader";
 
 const ReviewsPage = () => {
   const modalRef = useRef(null);
