@@ -8,6 +8,11 @@ import LoginPage from "../pages/Auth/Login/Login";
 import AuthLayout from "../layout/AuthLayout";
 import RegisterPage from "../pages/Auth/Register/Register";
 import CreateOrderPage from "../pages/CreateOrder";
+import DashboardLayout from "../layout/DashboardLayout";
+import ProfilePage from "../pages/Dashboard/User/Profile/Profle";
+import OrdersPage from "../pages/Dashboard/User/Orders/Orders";
+import ReviewsPage from "../pages/Dashboard/User/Reviews/Reviews";
+import FavoritesPage from "../pages/Dashboard/User/Favorite/Favorite";
 
 const router = createBrowserRouter([
   {
@@ -38,16 +43,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <div>dashboard Layout</div>,
+    element: <DashboardLayout></DashboardLayout>,
     children: [
       {
         index: true,
-        element: <div>Dashboard</div>,
+        element: <Navigate to="/dashboard/profile"></Navigate>,
       },
-      { path: "profile", element: <div>profile</div> },
-      { path: "orders", element: <div>orders</div> },
-      { path: "reviews", element: <div>reviews</div> },
-      { path: "favorites", element: <div>favorites</div> },
+      { path: "profile", element: <ProfilePage></ProfilePage> },
+      { path: "orders", element: <OrdersPage></OrdersPage> },
+      { path: "reviews", element: <ReviewsPage></ReviewsPage> },
+      { path: "favorites", element: <FavoritesPage></FavoritesPage> },
       { path: "create-meal", element: <div>create-meal</div> },
       { path: "my-meals", element: <div>my-meals</div> },
       { path: "order-requests", element: <div>order-requests</div> },
