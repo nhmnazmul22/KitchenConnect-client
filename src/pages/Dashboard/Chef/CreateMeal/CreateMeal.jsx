@@ -1,7 +1,7 @@
 import { ImagePlus, Clock, MapPin, DollarSign } from "lucide-react";
-import Textarea from "../../../../components/common/UI/Textarea";
-import Input from "../../../../components/common/UI/Input";
-import Select from "../../../../components/common/UI/Select";
+import Textarea from "@/components/common/UI/Textarea";
+import Input from "@/components/common/UI/Input";
+import Select from "@/components/common/UI/Select";
 
 const CreateMealPage = () => {
   return (
@@ -22,7 +22,7 @@ const CreateMealPage = () => {
               Meal Image
             </label>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <div className="w-40 h-40 bg-muted rounded-xl border-2 border-dashed border-border flex items-center justify-center">
+              <div className="w-40 h-40 bg-muted rounded-xl border-2 border-dashed border-base-300 flex items-center justify-center">
                 <ImagePlus className="w-10 h-10 text-muted-foreground" />
               </div>
               <div className="flex-1 space-y-2">

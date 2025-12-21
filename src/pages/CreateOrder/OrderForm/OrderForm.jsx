@@ -1,7 +1,7 @@
 import { CreditCard, MapPin } from "lucide-react";
 import React from "react";
-import Input from "../../../components/common/UI/Input";
-import Textarea from "../../../components/common/UI/Textarea";
+import Input from "@/components/common/UI/Input";
+import Textarea from "@/components/common/UI/Textarea";
 
 const OrderForm = ({ orderData }) => {
   return (
@@ -78,10 +78,7 @@ const OrderForm = ({ orderData }) => {
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="form-control">
                 <label className="label">Phone Number</label>
-                <Input
-                  type="tel"
-                  placeholder="+1 (555) 000-0000"
-                ></Input>
+                <Input type="tel" placeholder="+1 (555) 000-0000"></Input>
               </div>
               <div className="form-control">
                 <label className="label">Special Instructions</label>

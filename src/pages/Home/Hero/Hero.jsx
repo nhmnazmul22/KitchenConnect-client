@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import { stats } from "../../../constants";
+import { stats } from "@/constants";
 import { ArrowRight, Star, Clock } from "lucide-react";
 import { Link } from "react-router";
 

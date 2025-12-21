@@ -6,7 +6,7 @@ import {
   ShoppingCart,
   Leaf,
 } from "lucide-react";
-import Stars from "../../../components/common/UI/Stars";
+import Stars from "@/components/common/UI/Stars";
 import { motion } from "motion/react";
 import { Link } from "react-router";
 

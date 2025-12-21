@@ -1,8 +1,8 @@
 import { ChefHat, Shield } from "lucide-react";
-import { users } from "../../../../constants";
-import ProfileInfo from "../../../../components/Profile/ProfileInfo";
-import RoleRequestBtn from "../../../../components/Profile/RoleRequestBtn";
-import DashboardPageHeader from "../../../../components/Shared/Header/DashboardPageHeader";
+import { users } from "@/constants";
+import ProfileInfo from "@/components/Profile/ProfileInfo";
+import RoleRequestBtn from "@/components/Profile/RoleRequestBtn";
+import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
 
 const ProfilePage = () => {
   const user = users[1];
@@ -14,7 +14,7 @@ const ProfilePage = () => {
         subTitle="Manage your account information and preferences"
       ></DashboardPageHeader>
 
-      <div className="bg-card rounded-2xl border border-base-300 card-elevated overflow-hidden">
+      <div className="bg-base-100 rounded-2xl border border-base-300 card-elevated overflow-hidden">
         <div className="h-32 bg-linear-to-r from-primary to-primary/60" />
         <ProfileInfo user={user}></ProfileInfo>
       </div>

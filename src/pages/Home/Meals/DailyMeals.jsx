@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import { meals } from "../../../constants";
-import MealCard from "../../../components/Meals/MealCard";
+import { meals } from "@/constants";
+import MealCard from "@/components/Meals/MealCard";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 

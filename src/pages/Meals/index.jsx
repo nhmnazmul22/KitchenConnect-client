@@ -1,14 +1,9 @@
 import { useState } from "react";
-import {
-  Search,
-  SlidersHorizontal,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
-import MealCard from "../../components/Meals/MealCard";
-import { meals } from "../../constants";
-import PageHeader from "../../components/Shared/Header/PageHeader";
+import MealCard from "@/components/Meals/MealCard";
+import { meals } from "@/constants";
+import PageHeader from "@/components/Shared/Header/PageHeader";
 import SearchFilter from "./SearchFilter/SearchFilter";
 
 const MealsPage = () => {

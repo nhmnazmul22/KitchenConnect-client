@@ -23,7 +23,7 @@ const NotFound = () => {
           moved, deleted, or never existed in the first place.
         </p>
 
-        <div className="bg-card rounded-2xl p-6 border border-neutral-400 mb-8">
+        <div className="bg-base-100 rounded-2xl p-6 border border-neutral-400 mb-8">
           <p className="text-sm text-muted-foreground">Error Code</p>
           <p className="font-mono text-2xl font-bold text-primary">404</p>
         </div>

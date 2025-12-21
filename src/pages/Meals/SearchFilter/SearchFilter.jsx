@@ -1,6 +1,6 @@
-import { Search, SlidersHorizontal } from "lucide-react";
-import Select from "../../../components/common/UI/Select";
-import Input from "../../../components/common/UI/Input";
+import { Search } from "lucide-react";
+import Select from "@/components/common/UI/Select";
+import Input from "@/components/common/UI/Input";
 
 const SearchFilter = () => {
   return (

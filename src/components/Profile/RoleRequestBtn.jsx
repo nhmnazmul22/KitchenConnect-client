@@ -7,7 +7,7 @@ const RoleRequestBtn = ({
   ...BtnProps
 }) => {
   return (
-    <div className="bg-card rounded-2xl p-6 border border-base-300 card-elevated">
+    <div className="bg-base-100 rounded-2xl p-6 border border-base-300 card-elevated">
       <div className="flex items-center gap-4 mb-4">
         <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center">
           {icon}

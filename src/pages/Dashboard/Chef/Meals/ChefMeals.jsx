@@ -1,6 +1,6 @@
 import { Edit2, Trash2 } from "lucide-react";
-import MealCard from "../../../../components/Meals/MealCard";
-import { meals } from "../../../../constants";
+import MealCard from "@/components/Meals/MealCard";
+import { meals } from "@/constants";
 
 const ChefMealsPage = () => {
   const chefMeals = meals.filter((m) => m.chefId === "chef001");
@@ -42,7 +42,7 @@ const ChefMealsPage = () => {
             </div>
           ))
         ) : (
-          <div className="col-span-full text-center py-12 bg-card rounded-2xl border border-border">
+          <div className="col-span-full text-center py-12 bg-base-100 rounded-2xl border border-base-300">
             <p className="text-muted-foreground">
               You haven't created any meals yet.
             </p>

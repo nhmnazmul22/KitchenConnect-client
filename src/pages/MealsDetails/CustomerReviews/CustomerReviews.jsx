@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import ReviewCard from "../../../components/Reviews/ReviewCard";
-import WriteReview from "../../../components/Reviews/WriteReviewModal";
+import ReviewCard from "@/components/Reviews/ReviewCard";
+import WriteReview from "@/components/Reviews/WriteReviewModal";
 import { motion } from "motion/react";
 
 const CustomerReviews = ({ mealReviews }) => {
@@ -21,7 +21,10 @@ const CustomerReviews = ({ mealReviews }) => {
             See what others are saying about this dish
           </p>
         </div>
-        <button className="btn btn-primary max-sm:hidden" onClick={handelShowModal}>
+        <button
+          className="btn btn-primary max-sm:hidden"
+          onClick={handelShowModal}
+        >
           Write a Review
         </button>
         <WriteReview ref={ModalRef}></WriteReview>
@@ -47,7 +50,10 @@ const CustomerReviews = ({ mealReviews }) => {
           </p>
         </div>
       )}
-      <button className="btn btn-primary block sm:hidden mt-10" onClick={handelShowModal}>
+      <button
+        className="btn btn-primary block sm:hidden mt-10"
+        onClick={handelShowModal}
+      >
         Write a Review
       </button>
     </section>

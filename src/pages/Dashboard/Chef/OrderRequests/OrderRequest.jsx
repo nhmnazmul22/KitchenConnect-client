@@ -1,6 +1,6 @@
-import OrderCard from "../../../../components/Orders/OrderCard";
-import { orders } from "../../../../constants";
-import DashboardPageHeader from "../../../../components/Shared/Header/DashboardPageHeader";
+import OrderCard from "@/components/Orders/OrderCard";
+import { orders } from "@/constants";
+import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
 const OrderRequestsPage = () => {
   return (
     <div className="pr-5">
@@ -29,7 +29,7 @@ const OrderRequestsPage = () => {
       </div>
 
       {orders.length === 0 && (
-        <div className="text-center py-12 bg-card rounded-2xl border border-border">
+        <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
           <p className="text-muted-foreground">
             No order requests at the moment.
           </p>

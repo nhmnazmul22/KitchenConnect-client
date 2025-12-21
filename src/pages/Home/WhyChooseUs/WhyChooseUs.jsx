@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import { benefits } from "../../../constants";
+import { benefits } from "@/constants";
 
 const WhyChooseUs = () => {
   return (

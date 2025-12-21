@@ -9,7 +9,7 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
-import { socialLinks } from "../../../constants";
+import { socialLinks } from "@/constants";
 import Logo from "../../common/Logo/Logo";
 
 const Footer = () => {

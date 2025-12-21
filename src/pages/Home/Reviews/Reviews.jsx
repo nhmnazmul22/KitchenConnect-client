@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import { reviews } from "../../../constants";
-import ReviewCard from "../../../components/Reviews/ReviewCard";
+import { reviews } from "@/constants";
+import ReviewCard from "@/components/Reviews/ReviewCard";
 
 const Reviews = () => {
   const featuredReviews = reviews.slice(0, 3);

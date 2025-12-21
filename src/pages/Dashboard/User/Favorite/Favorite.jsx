@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react";
-import { favorites } from "../../../../constants";
-import DashboardPageHeader from "../../../../components/Shared/Header/DashboardPageHeader";
+import { favorites } from "@/constants";
+import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
 
 const FavoritesPage = () => {
   return (
@@ -47,7 +47,7 @@ const FavoritesPage = () => {
       </div>
 
       {favorites.length === 0 && (
-        <div className="text-center py-12 bg-card rounded-2xl border border-border">
+        <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
           <p className="text-muted-foreground">
             You haven't added any favorites yet.
           </p>

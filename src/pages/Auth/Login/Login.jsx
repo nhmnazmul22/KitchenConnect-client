@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import Logo from "../../../components/common/Logo/Logo";
-import Input from "../../../components/common/UI/Input";
+import Logo from "@/components/common/Logo/Logo";
+import Input from "@/components/common/UI/Input";
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 

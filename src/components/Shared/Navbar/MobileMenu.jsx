@@ -1,5 +1,5 @@
 import React from "react";
-import { navLinks } from "../../../constants";
+import { navLinks } from "@/constants";
 import { Link, NavLink } from "react-router";
 import { User } from "lucide-react";
 

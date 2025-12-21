@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import ReviewCard from "../../../../components/Reviews/ReviewCard";
-import WriteReviewModal from "../../../../components/Reviews/WriteReviewModal";
-import { reviews } from "../../../../constants";
+import ReviewCard from "@/components/Reviews/ReviewCard";
+import WriteReviewModal from "@/components/Reviews/WriteReviewModal";
+import { reviews } from "@/constants";
 import { Edit2, Trash2 } from "lucide-react";
-import DashboardPageHeader from "../../../../components/Shared/Header/DashboardPageHeader";
+import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
 
 const ReviewsPage = () => {
   const modalRef = useRef(null);
@@ -42,7 +42,7 @@ const ReviewsPage = () => {
       </div>
 
       {reviews.length === 0 && (
-        <div className="text-center py-12 bg-card rounded-2xl border border-border">
+        <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
           <p className="text-muted-foreground">
             You haven't written any reviews yet.
           </p>

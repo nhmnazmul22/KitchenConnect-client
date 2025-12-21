@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { motion } from "motion/react";
 import { Heart, Award } from "lucide-react";
-import { meals, reviews } from "../../constants";
+import { meals, reviews } from "@/constants";
 import MealInfo from "./MealInfo/MealInfo";
 import CustomerReviews from "./CustomerReviews/CustomerReviews";
 

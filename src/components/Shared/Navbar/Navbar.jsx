@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu, X, User, ShoppingBag, Heart } from "lucide-react";
 import ThemeToggle from "../../Theme/ThemeToggle";
-import { navLinks } from "../../../constants";
+import { navLinks } from "@/constants";
 import MobileMenu from "./MobileMenu";
 import Logo from "../../common/Logo/Logo";
 

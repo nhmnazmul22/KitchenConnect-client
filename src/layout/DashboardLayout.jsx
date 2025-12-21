@@ -8,7 +8,7 @@ import Sidebar from "../components/Shared/Sidebar/Sidebar";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const userRole = "user";
+  const userRole = "admin";
   const currentMenu = dashboardMenuItems[userRole];
 
   return (
@@ -38,7 +38,7 @@ const DashboardLayout = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="pt-22 ps-4 lg:ps-8 pb-10 max-w-7xl"
+            className="pt-22 px-5 lg:ps-8 pb-10 max-w-7xl"
           >
             <Outlet></Outlet>
           </motion.div>

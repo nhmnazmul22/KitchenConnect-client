@@ -10,9 +10,9 @@ import {
   ImagePlus,
 } from "lucide-react";
 import { useState } from "react";
-import Logo from "../../../components/common/Logo/Logo";
-import Input from "../../../components/common/UI/Input";
-import Textarea from "../../../components/common/UI/Textarea";
+import Logo from "@/components/common/Logo/Logo";
+import Input from "@/components/common/UI/Input";
+import Textarea from "@/components/common/UI/Textarea";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
