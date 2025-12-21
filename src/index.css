@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-@plugin "daisyui";
 
+@plugin "daisyui";
 /* Light Theme */
 @plugin "daisyui/theme" {
   name: "localchef-light";
@@ -86,8 +86,6 @@
 
 body {
   font-family: "DM Sans", sans-serif;
-  width: 100dvw;
-  overflow-x: hidden;
 }
 
 h1,
@@ -178,5 +176,11 @@ h6 {
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-base-100 min-h-screen w-dvw overflow-x-hidden;
   }
 }
