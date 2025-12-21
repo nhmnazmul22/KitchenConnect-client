@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { Star, Clock, MapPin, Heart } from "lucide-react";
 
-const MealCard = ({ meal }) => {
+const MealCard = ({ meal, isChefView = false }) => {
   return (
     <div className="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
       <figure className="relative h-48 overflow-hidden">
@@ -11,18 +11,16 @@ const MealCard = ({ meal }) => {
           className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-linear-to-t from-base-content/60 to-transparent" />
+        {isChefView && (
+          <button className="btn btn-circle btn-sm btn-ghost bg-base-100/90 absolute top-3 right-3 hover:bg-primary hover:text-primary-content">
+            <Heart className="w-4 h-4" />
+          </button>
+        )}
 
-        {/* Favorite Button */}
-        <button className="btn btn-circle btn-sm btn-ghost bg-base-100/90 absolute top-3 right-3 hover:bg-primary hover:text-primary-content">
-          <Heart className="w-4 h-4" />
-        </button>
-
-        {/* Price Badge */}
         <div className="badge badge-primary absolute bottom-3 left-3 font-bold">
           ${meal.price.toFixed(2)}
         </div>
 
-        {/* Rating Badge */}
         <div className="badge bg-base-100/90 gap-1 absolute bottom-3 right-3">
           <Star className="w-3 h-3 text-warning fill-warning" />
           <span className="font-semibold">{meal.rating}</span>
@@ -49,14 +47,16 @@ const MealCard = ({ meal }) => {
           </div>
         </div>
 
-        <div className="card-actions mt-2">
-          <Link
-            to={`/meals/${meal._id}`}
-            className="btn btn-primary btn-sm w-full btn-shine"
-          >
-            See Details
-          </Link>
-        </div>
+        {isChefView && (
+          <div className="card-actions mt-2">
+            <Link
+              to={`/meals/${meal._id}`}
+              className="btn btn-primary btn-sm w-full btn-shine"
+            >
+              See Details
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
