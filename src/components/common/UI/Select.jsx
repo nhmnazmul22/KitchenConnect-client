@@ -1,10 +1,10 @@
 import React from "react";
 
-const Select = ({ label = "", options = [], className = "" }) => {
+const Select = ({ label = "", options = [], className = "" , ...props}) => {
   return (
     <select
-      className={`select w-full bg-white md:w-40 border border-base-300 focus-within:border-primary focus-within:outline-none
-       focus-within:ring-2 ring-offset-2 ring-primary transition-all duration-300 px-2 rounded-lg focus-visible:outline-0 ${className}`}
+      className={`select w-full bg-base-100 md:w-40 border border-base-300 ${className}`}
+      {...props}
     >
       <option disabled selected>
         {label}

@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import Logo from "../../../components/common/Logo/Logo";
 import Input from "../../../components/common/UI/Input";
-import Textarea from "../../../components/common/UI/TextArea";
+import Textarea from "../../../components/common/UI/Textarea";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);

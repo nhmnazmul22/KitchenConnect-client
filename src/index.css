@@ -86,6 +86,8 @@
 
 body {
   font-family: "DM Sans", sans-serif;
+  width: 100dvw;
+  overflow-x: hidden;
 }
 
 h1,
