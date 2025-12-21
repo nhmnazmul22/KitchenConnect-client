@@ -13,7 +13,9 @@ import ProfilePage from "../pages/Dashboard/User/Profile/Profile";
 import OrdersPage from "../pages/Dashboard/User/Orders/Orders";
 import ReviewsPage from "../pages/Dashboard/User/Reviews/Reviews";
 import FavoritesPage from "../pages/Dashboard/User/Favorite/Favorite";
-
+import CreateMealPage from "../pages/Dashboard/Chef/CreateMeal/CreateMeal";
+import ChefMealsPage from "../pages/Dashboard/Chef/Meals/ChefMeals";
+import OrderRequestsPage from "../pages/Dashboard/Chef/OrderRequests/OrderRequest";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,9 +55,12 @@ const router = createBrowserRouter([
       { path: "orders", element: <OrdersPage></OrdersPage> },
       { path: "reviews", element: <ReviewsPage></ReviewsPage> },
       { path: "favorites", element: <FavoritesPage></FavoritesPage> },
-      { path: "create-meal", element: <div>create-meal</div> },
-      { path: "my-meals", element: <div>my-meals</div> },
-      { path: "order-requests", element: <div>order-requests</div> },
+      { path: "create-meal", element: <CreateMealPage></CreateMealPage> },
+      { path: "my-meals", element: <ChefMealsPage></ChefMealsPage> },
+      {
+        path: "order-requests",
+        element: <OrderRequestsPage></OrderRequestsPage>,
+      },
       { path: "users", element: <div>users</div> },
       { path: "requests", element: <div>requests</div> },
       { path: "statistics", element: <div>statistics</div> },
