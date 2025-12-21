@@ -1,21 +1,25 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import RootLayout from "../layout/RootLayout";
-import HomePage from "../pages/Home";
-import MealsPage from "../pages/Meals";
-import NotFound from "../pages/Errors/NotFound";
-import MealDetailsPage from "../pages/MealsDetails";
-import LoginPage from "../pages/Auth/Login/Login";
-import AuthLayout from "../layout/AuthLayout";
-import RegisterPage from "../pages/Auth/Register/Register";
-import CreateOrderPage from "../pages/CreateOrder";
-import DashboardLayout from "../layout/DashboardLayout";
-import ProfilePage from "../pages/Dashboard/User/Profile/Profile";
-import OrdersPage from "../pages/Dashboard/User/Orders/Orders";
-import ReviewsPage from "../pages/Dashboard/User/Reviews/Reviews";
-import FavoritesPage from "../pages/Dashboard/User/Favorite/Favorite";
-import CreateMealPage from "../pages/Dashboard/Chef/CreateMeal/CreateMeal";
-import ChefMealsPage from "../pages/Dashboard/Chef/Meals/ChefMeals";
-import OrderRequestsPage from "../pages/Dashboard/Chef/OrderRequests/OrderRequest";
+import RootLayout from "@/layout/RootLayout";
+import HomePage from "@/pages/Home";
+import MealsPage from "@/pages/Meals";
+import NotFound from "@/pages/Errors/NotFound";
+import MealDetailsPage from "@/pages/MealsDetails";
+import LoginPage from "@/pages/Auth/Login/Login";
+import AuthLayout from "@/layout/AuthLayout";
+import RegisterPage from "@/pages/Auth/Register/Register";
+import CreateOrderPage from "@/pages/CreateOrder";
+import DashboardLayout from "@/layout/DashboardLayout";
+import ProfilePage from "@/pages/Dashboard/Profile/Profile";
+import OrdersPage from "@/pages/Dashboard/User/Orders/Orders";
+import ReviewsPage from "@/pages/Dashboard/User/Reviews/Reviews";
+import FavoritesPage from "@/pages/Dashboard/User/Favorite/Favorite";
+import CreateMealPage from "@/pages/Dashboard/Chef/CreateMeal/CreateMeal";
+import ChefMealsPage from "@/pages/Dashboard/Chef/Meals/ChefMeals";
+import OrderRequestsPage from "@/pages/Dashboard/Chef/OrderRequests/OrderRequest";
+import ManageUsersPage from "@/pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import RoleRequestsPage from "@/pages/Dashboard/Admin/RoleRequests/RoleRequests";
+import StatisticsPage from "@/pages/Dashboard/Admin/Statistics/Statistics";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,9 +65,9 @@ const router = createBrowserRouter([
         path: "order-requests",
         element: <OrderRequestsPage></OrderRequestsPage>,
       },
-      { path: "users", element: <div>users</div> },
-      { path: "requests", element: <div>requests</div> },
-      { path: "statistics", element: <div>statistics</div> },
+      { path: "users", element: <ManageUsersPage></ManageUsersPage> },
+      { path: "requests", element: <RoleRequestsPage></RoleRequestsPage> },
+      { path: "statistics", element: <StatisticsPage></StatisticsPage> },
     ],
   },
   { path: "*", element: <NotFound></NotFound> },
