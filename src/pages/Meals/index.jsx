@@ -2,16 +2,32 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
 import MealCard from "@/components/Meals/MealCard";
-import { meals } from "@/constants";
 import PageHeader from "@/components/Shared/Header/PageHeader";
 import SearchFilter from "./SearchFilter/SearchFilter";
+import { getMeals } from "@/services/MealService";
+import MealCardSkeleton from "@/components/Fallback/MealCardSkeleton";
+import useSearch from "@/hook/useSearch";
+import { useQuery } from "@tanstack/react-query";
 
 const MealsPage = () => {
-  const [currentPage] = useState(1);
-  const mealsPerPage = 9;
-  const totalPages = Math.ceil(meals.length / mealsPerPage);
+  const { limit, skip, sort, order, search, setSkip } = useSearch();
+  const {
+    data = { meals: [], total: 0 },
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["meals", limit, skip, sort, order, search],
+    queryFn: () => getMeals(limit, skip, sort, order, search),
+    keepPreviousData: true,
+  });
 
-  const displayedMeals = meals;
+  const mealsPerPage = 9;
+  const totalPages = Math.ceil(data.total / mealsPerPage);
+  const currentPage = Math.floor(skip / limit) + 1;
+
+  const handlePageChange = (page) => {
+    setSkip((page - 1) * limit);
+  };
 
   return (
     <div className="bg-base-1000">
@@ -26,30 +42,46 @@ const MealsPage = () => {
         <div className="main-container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <p className="opacity-70">
-              Showing{" "}
-              <span className="font-semibold opacity-100">
-                {displayedMeals.length}
-              </span>{" "}
+              Showing
+              <span className="font-semibold opacity-100 mx-1">
+                {data.meals.length}
+              </span>
               delicious meals
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {displayedMeals.map((meal, index) => (
-              <motion.div
-                key={meal._id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <MealCard meal={meal} />
-              </motion.div>
-            ))}
-          </div>
+          {data?.meals?.length === 0 && isError && (
+            <div className="text-center my-10 text-base">
+              <p>Meals not found, Please try again</p>
+            </div>
+          )}
+
+          {!isError && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {data.meals.length > 0 && !isLoading ? (
+                data?.meals.map((meal, index) => (
+                  <motion.div
+                    key={meal._id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <MealCard meal={meal} />
+                  </motion.div>
+                ))
+              ) : (
+                <MealCardSkeleton />
+              )}
+            </div>
+          )}
 
           <div className="mt-12 flex justify-center">
             <div className="join">
-              <button className="join-item btn" disabled={currentPage === 1}>
+              <button
+                className="join-item btn"
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+              >
                 <ChevronLeft className="w-4 h-4" />
               </button>
 
@@ -57,6 +89,7 @@ const MealsPage = () => {
                 (page) => (
                   <button
                     key={page}
+                    onClick={() => handlePageChange(page)}
                     className={`join-item btn ${
                       currentPage === page ? "btn-primary" : ""
                     }`}
@@ -69,6 +102,7 @@ const MealsPage = () => {
               <button
                 className="join-item btn"
                 disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
               >
                 <ChevronRight className="w-4 h-4" />
               </button>

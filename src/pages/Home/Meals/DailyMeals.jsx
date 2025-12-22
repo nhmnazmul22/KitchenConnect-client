@@ -3,14 +3,16 @@ import { motion } from "motion/react";
 import MealCard from "@/components/Meals/MealCard";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import { use } from "react";
 import { getMeals } from "@/services/MealService";
 import MealCardSkeleton from "@/components/Fallback/MealCardSkeleton";
-
-const mealPromise = getMeals(6, 0, "rating");
+import { useQuery } from "@tanstack/react-query";
 
 const DailyMeals = () => {
-  const mealData = use(mealPromise);
+  const { data = { meals: [], total: 0 }, isLoading } = useQuery({
+    queryKey: ["meals"],
+    queryFn: () => getMeals(6, 0, "rating"),
+    keepPreviousData: true,
+  });
 
   return (
     <section className="py-16 md:py-24 bg-base-200">
@@ -34,8 +36,8 @@ const DailyMeals = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mealData && mealData.length > 0 ? (
-            mealData.map((meal, index) => (
+          {data.meals && data.meals.length > 0 && !isLoading ? (
+            data.meals.map((meal, index) => (
               <motion.div
                 key={meal._id}
                 initial={{ opacity: 0, y: 30 }}
