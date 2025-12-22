@@ -6,7 +6,7 @@ const MealCard = ({ meal, isChefView = false }) => {
     <div className="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
       <figure className="relative h-48 overflow-hidden">
         <img
-          src={meal.image}
+          src={meal.foodImage || "https://placehold.co/600x400"}
           alt={meal.foodName}
           className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
         />
@@ -36,14 +36,16 @@ const MealCard = ({ meal, isChefView = false }) => {
           by{" "}
           <span className="font-medium text-secondary">
             {meal.chefName}{" "}
-            <span className="badge badge-sm badge-primary ms-2">{meal.chefId}</span>
+            <span className="badge badge-sm badge-primary ms-2">
+              {meal.chefId}
+            </span>
           </span>
         </p>
 
         <div className="flex items-center gap-4 text-xs opacity-60">
           <div className="flex items-center gap-1">
             <Clock className="w-3.5 h-3.5" />
-            <span>{meal.deliveryTime}</span>
+            <span>{meal.estimatedDeliveryTime}</span>
           </div>
           <div className="flex items-center gap-1">
             <MapPin className="w-3.5 h-3.5" />

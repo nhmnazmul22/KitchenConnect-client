@@ -22,8 +22,6 @@ import {
 export const navLinks = [
   { name: "Home", path: "/" },
   { name: "Meals", path: "/meals" },
-  { name: "Dashboard", path: "/dashboard" },
-  { name: "Profile", path: "/dashboard/profile" },
 ];
 
 export const socialLinks = [

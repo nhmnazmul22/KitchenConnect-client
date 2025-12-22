@@ -1,12 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import { meals } from "@/constants";
 import MealCard from "@/components/Meals/MealCard";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
+import { use } from "react";
+import { getMeals } from "@/services/MealService";
+import MealCardSkeleton from "@/components/Fallback/MealCardSkeleton";
+
+const mealPromise = getMeals(6, 0, "rating");
 
 const DailyMeals = () => {
-  const dailyMeals = meals.slice(0, 6);
+  const mealData = use(mealPromise);
 
   return (
     <section className="py-16 md:py-24 bg-base-200">
@@ -30,17 +34,21 @@ const DailyMeals = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dailyMeals.map((meal, index) => (
-            <motion.div
-              key={meal._id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <MealCard meal={meal} />
-            </motion.div>
-          ))}
+          {mealData && mealData.length > 0 ? (
+            mealData.map((meal, index) => (
+              <motion.div
+                key={meal._id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <MealCard meal={meal} />
+              </motion.div>
+            ))
+          ) : (
+            <MealCardSkeleton />
+          )}
         </div>
 
         <div className="text-center mt-10">
