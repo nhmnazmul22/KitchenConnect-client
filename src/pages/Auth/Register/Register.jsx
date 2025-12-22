@@ -1,29 +1,16 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import {
-  Mail,
-  Lock,
-  User,
-  ChefHat,
-  Eye,
-  EyeOff,
-  ImagePlus,
-} from "lucide-react";
-import { useState } from "react";
 import Logo from "@/components/common/Logo/Logo";
-import Input from "@/components/common/UI/Input";
-import Textarea from "@/components/common/UI/Textarea";
+import { RegisterBanner } from "@/assets/meals";
+import RegisterForm from "@/components/Forms/RegisterForm";
 
 const RegisterPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   return (
     <div className="min-h-screen bg-base-100 flex">
       <div className="hidden lg:flex flex-1 relative">
         <div className="absolute inset-0 bg-linear-to-br from-secondary/80 to-secondary" />
         <img
-          src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800"
+          src={RegisterBanner}
           alt="Fresh ingredients"
           className="w-full h-full object-cover mix-blend-overlay"
         />
@@ -57,126 +44,7 @@ const RegisterPage = () => {
             </p>
           </div>
 
-          <form className="space-y-5">
-            <div className="form-control">
-              <label className="label mb-1">Profile Image</label>
-              <div className="flex sm:items-center max-sm:flex-col gap-4">
-                <div className="w-16 h-16 rounded-full bg-base-200 flex items-center justify-center border-2 border-dashed border-base-300">
-                  <ImagePlus className="w-6 h-6 opacity-50" />
-                </div>
-                <div className="flex-1">
-                  <Input type="text" placeholder="Enter image URL"></Input>
-                  <p className="text-xs opacity-60 mt-3">
-                    JPG, PNG or GIF, max 2MB
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Full Name</span>
-              </label>
-              <Input
-                type="text"
-                placeholder="John Doe"
-                icon={<User className="w-5 h-5 opacity-50" />}
-              ></Input>
-            </div>
-
-            <div className="form-control">
-              <label className="label">Email Address</label>
-              <Input
-                type="email"
-                placeholder="you@example.com"
-                icon={<Mail className="w-5 h-5 opacity-50" />}
-              ></Input>
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <div
-                className="input gap-2 w-full focus-within:outline-none
-              focus-within:border-neutral-300 focus-within:shadow-sm flex items-center"
-              >
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  icon={<Lock className="w-5 h-5 opacity-50" />}
-                  labelClassNames="border-0 bg-transparent p-0"
-                ></Input>
-                <button
-                  type="button"
-                  className="btn btn-ghost btn-xs btn-circle "
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Confirm Password</span>
-              </label>
-              <div
-                className="input gap-2 w-full focus-within:outline-none
-              focus-within:border-neutral-300 focus-within:shadow-sm flex items-center"
-              >
-                <Input
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  icon={<Lock className="w-5 h-5 opacity-50" />}
-                  labelClassNames="border-0 bg-transparent p-0"
-                ></Input>
-                <button
-                  type="button"
-                  className="btn btn-ghost btn-xs btn-circle "
-                  onClick={() => setShowConfirmPassword(!showPassword)}
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div className="form-control">
-              <label className="label">Address</label>
-              <Textarea placeholder="Enter your delivery address"></Textarea>
-            </div>
-
-            <div className="form-control">
-              <label className="label cursor-pointer justify-start gap-3">
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-primary checkbox-sm"
-                />
-                <span className="text-xs sm:text-sm">
-                  I agree to the{" "}
-                  <Link to="/terms" className="link link-primary">
-                    Terms
-                  </Link>{" "}
-                  and{" "}
-                  <Link to="/privacy" className="link link-primary">
-                    Privacy Policy
-                  </Link>
-                </span>
-              </label>
-            </div>
-
-            <button type="submit" className="btn btn-primary w-full btn-shine">
-              Create Account
-            </button>
-          </form>
+          <RegisterForm></RegisterForm>
 
           <p className="text-center text-sm opacity-70 mt-8">
             Already have an account?{" "}
