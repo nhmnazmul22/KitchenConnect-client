@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { Menu, X, User, ShoppingBag, Heart } from "lucide-react";
+import { Menu, X, User, ShoppingBag, Heart, Layout } from "lucide-react";
 import ThemeToggle from "../../Theme/ThemeToggle";
 import { navLinks } from "@/constants";
 import MobileMenu from "./MobileMenu";
 import Logo from "../../common/Logo/Logo";
+import useAuth from "@/hook/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, userProfile } = useAuth();
   const isLoggedIn = false;
 
   return (
@@ -39,47 +41,60 @@ const Navbar = () => {
           <ThemeToggle />
 
           <div className="hidden md:flex items-center gap-2">
-            {isLoggedIn ? (
+            {user && userProfile ? (
               <>
-                <Link
-                  to="/favorites"
-                  className="btn btn-ghost btn-circle btn-sm"
-                >
-                  <Heart className="w-5 h-5" />
-                </Link>
-                <Link
-                  to="/dashboard/orders"
-                  className="btn btn-ghost btn-circle btn-sm"
-                >
-                  <ShoppingBag className="w-5 h-5" />
-                </Link>
+                {userProfile.role === "user" && (
+                  <>
+                    <Link
+                      to="/favorites"
+                      className="btn btn-ghost btn-circle btn-sm"
+                    >
+                      <Heart className="w-5 h-5" />
+                    </Link>
+                    <Link
+                      to="/dashboard/orders"
+                      className="btn btn-ghost btn-circle btn-sm"
+                    >
+                      <ShoppingBag className="w-5 h-5" />
+                    </Link>
+                  </>
+                )}
                 <div className="dropdown dropdown-end">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-ghost btn-circle avatar"
-                  >
-                    <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100"
-                        alt="Profile"
-                      />
-                    </div>
+                  <div tabIndex={0} className="cursor-pointer">
+                    {userProfile.profileImage ? (
+                      <div className="avatar">
+                        <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                          <img
+                            src={userProfile.profileImage || ""}
+                            alt="Profile"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="avatar avatar-placeholder">
+                        <div class=" bg-neutral text-neutral-content w-10 rounded-full">
+                          <span class="text-xl">
+                            {userProfile?.name[0] || "G"}
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
+
                   <ul
                     tabIndex={0}
                     className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-lg mt-3"
                   >
                     <li>
-                      <Link to="/dashboard/profile">
-                        <User className="w-4 h-4" />
-                        Profile
+                      <Link to="/dashboard">
+                        <Layout className="w-4 h-4" />
+                        Dashboard
                       </Link>
                     </li>
                     <li>
-                      <Link to="/dashboard/orders">
-                        <ShoppingBag className="w-4 h-4" />
-                        My Orders
+                      <Link to="/dashboard/profile">
+                        <User className="w-4 h-4" />
+                        Profile
                       </Link>
                     </li>
                     <div className="divider my-1"></div>

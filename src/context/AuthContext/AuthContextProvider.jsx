@@ -9,10 +9,13 @@ import {
   deleteUser,
 } from "firebase/auth";
 import auth from "@/firebase/firebase.init";
-// import Loader from "@/components/Fallback/Loader";
+import { generateToken } from "@/services/TokenService";
+import Loader from "@/components/Fallback/Loader";
+import { getProfile } from "@/services/UserService";
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
@@ -39,10 +42,19 @@ const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setLoading(true);
       if (currentUser) {
         setUser(currentUser);
+        const result = await generateToken(currentUser.email);
+        if (!result.success) {
+          signOut(auth);
+          setLoading(false);
+        }
+        const profile = await getProfile();
+        if (profile.success) {
+          setUserProfile(profile.data);
+        }
       }
       setLoading(false);
     });
@@ -52,9 +64,9 @@ const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
-  // if (loading) {
-  //   return <Loader></Loader>;
-  // }
+  if (loading) {
+    return <Loader></Loader>;
+  }
 
   const authInfo = {
     createUser,
@@ -66,9 +78,9 @@ const AuthContextProvider = ({ children }) => {
     setUser,
     loading,
     user,
+    userProfile,
   };
 
-  console.log("AuthContextProvider user:", user);
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
