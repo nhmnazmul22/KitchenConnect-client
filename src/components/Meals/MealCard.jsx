@@ -11,7 +11,7 @@ const MealCard = ({ meal, isChefView = false }) => {
           className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-linear-to-t from-base-content/60 to-transparent" />
-        {isChefView && (
+        {!isChefView && (
           <button className="btn btn-circle btn-sm btn-ghost bg-base-100/90 absolute top-3 right-3 hover:bg-primary hover:text-primary-content">
             <Heart className="w-4 h-4" />
           </button>
@@ -33,7 +33,11 @@ const MealCard = ({ meal, isChefView = false }) => {
         </h3>
 
         <p className="text-sm opacity-70">
-          by <span className="font-medium text-secondary">{meal.chefName}</span>
+          by{" "}
+          <span className="font-medium text-secondary">
+            {meal.chefName}{" "}
+            <span className="badge badge-sm badge-primary ms-2">{meal.chefId}</span>
+          </span>
         </p>
 
         <div className="flex items-center gap-4 text-xs opacity-60">
@@ -47,7 +51,7 @@ const MealCard = ({ meal, isChefView = false }) => {
           </div>
         </div>
 
-        {isChefView && (
+        {!isChefView && (
           <div className="card-actions mt-2">
             <Link
               to={`/meals/${meal._id}`}

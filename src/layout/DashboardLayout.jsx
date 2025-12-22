@@ -8,7 +8,7 @@ import Sidebar from "../components/Shared/Sidebar/Sidebar";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const userRole = "admin";
+  const userRole = "chef";
   const currentMenu = dashboardMenuItems[userRole];
 
   return (

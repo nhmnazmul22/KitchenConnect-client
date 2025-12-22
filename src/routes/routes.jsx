@@ -19,6 +19,7 @@ import OrderRequestsPage from "@/pages/Dashboard/Chef/OrderRequests/OrderRequest
 import ManageUsersPage from "@/pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import RoleRequestsPage from "@/pages/Dashboard/Admin/RoleRequests/RoleRequests";
 import StatisticsPage from "@/pages/Dashboard/Admin/Statistics/Statistics";
+import GuestGuard from "./GustGurd";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <AuthLayout></AuthLayout>,
+    element: (
+      <GuestGuard>
+        <AuthLayout></AuthLayout>
+      </GuestGuard>
+    ),
     children: [
       {
         index: true,
