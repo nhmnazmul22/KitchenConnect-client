@@ -1,27 +1,30 @@
+import useAuth from "@/hooks/useAuth";
 import { Award, Edit2, Mail, MapPin, User } from "lucide-react";
 import React from "react";
 
-const ProfileInfo = ({ user }) => {
+const ProfileInfo = () => {
+  const { userProfile } = useAuth();
+
   return (
     <div className="px-6 pb-6">
       <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12 mb-6">
         <figure className="relative">
           <img
-            src={user.image}
-            alt={user.name}
+            src={userProfile.profileImage || null}
+            alt={userProfile.name}
             className="w-24 h-24 rounded-2xl border-4 border-base-200 object-cover"
           />
         </figure>
         <div className="flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="font-display text-2xl font-bold text-foreground">
-              {user.name}
+              {userProfile.name}
             </h2>
             <span className="badge badge-secondary capitalize">
-              {user.role}
+              {userProfile.role}
             </span>
             <span className="badge bg-secondary/20 text-secondary">
-              {user.status}
+              {userProfile.status}
             </span>
           </div>
         </div>
@@ -37,7 +40,7 @@ const ProfileInfo = ({ user }) => {
           </div>
           <div>
             <p className="text-xs text-muted-foreground">Full Name</p>
-            <p className="font-medium text-foreground">{user.name}</p>
+            <p className="font-medium text-foreground">{userProfile.name}</p>
           </div>
         </div>
 
@@ -47,7 +50,7 @@ const ProfileInfo = ({ user }) => {
           </div>
           <div>
             <p className="text-xs text-muted-foreground">Email Address</p>
-            <p className="font-medium text-foreground">{user.email}</p>
+            <p className="font-medium text-foreground">{userProfile.email}</p>
           </div>
         </div>
 
@@ -57,7 +60,7 @@ const ProfileInfo = ({ user }) => {
           </div>
           <div>
             <p className="text-xs text-muted-foreground">Address</p>
-            <p className="font-medium text-foreground">{user.address}</p>
+            <p className="font-medium text-foreground">{userProfile.address}</p>
           </div>
         </div>
 
@@ -68,7 +71,7 @@ const ProfileInfo = ({ user }) => {
           <div>
             <p className="text-xs text-muted-foreground">Account Status</p>
             <p className="font-medium text-foreground capitalize">
-              {user.status}
+              {userProfile.status}
             </p>
           </div>
         </div>

@@ -5,10 +5,12 @@ import Navbar from "../components/Shared/Navbar/Navbar";
 import { Outlet } from "react-router";
 import { dashboardMenuItems } from "../constants";
 import Sidebar from "../components/Shared/Sidebar/Sidebar";
+import useAuth from "@/hooks/useAuth";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const userRole = "chef";
+  const { userProfile } = useAuth();
+  const userRole = userProfile.role;
   const currentMenu = dashboardMenuItems[userRole];
 
   return (
