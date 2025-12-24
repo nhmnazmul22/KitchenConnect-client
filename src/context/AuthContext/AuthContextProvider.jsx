@@ -9,7 +9,7 @@ import {
   deleteUser,
 } from "firebase/auth";
 import auth from "@/firebase/firebase.init";
-import { generateToken } from "@/services/TokenService";
+import { clearCookie, generateToken } from "@/services/TokenService";
 import Loader from "@/components/Fallback/Loader";
 import { getProfile } from "@/services/UserService";
 
@@ -27,6 +27,9 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const signOutUser = () => {
+    setUser(null);
+    setUserProfile(null);
+    clearCookie();
     return signOut(auth);
   };
 
@@ -52,9 +55,11 @@ const AuthContextProvider = ({ children }) => {
           setLoading(false);
         }
         const profile = await getProfile();
-        if (profile.success) {
-          setUserProfile(profile.data);
+        if (!profile.success) {
+          setLoading(false);
+          setUserProfile(null);
         }
+        setUserProfile(profile.data);
       }
       setLoading(false);
     });

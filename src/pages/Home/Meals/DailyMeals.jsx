@@ -4,7 +4,7 @@ import MealCard from "@/components/Meals/MealCard";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import { getMeals } from "@/services/MealService";
-import MealCardSkeleton from "@/components/Fallback/MealCardSkeleton";
+import MealCardSkeleton from "@/components/Fallback/CardSkeleton";
 import { useQuery } from "@tanstack/react-query";
 
 const DailyMeals = () => {

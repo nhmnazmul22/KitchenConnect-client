@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
 import MealCard from "@/components/Meals/MealCard";
 import PageHeader from "@/components/Shared/Header/PageHeader";
 import SearchFilter from "./SearchFilter/SearchFilter";
 import { getMeals } from "@/services/MealService";
-import MealCardSkeleton from "@/components/Fallback/MealCardSkeleton";
+import CardSkeleton from "@/components/Fallback/CardSkeleton";
 import useSearch from "@/hook/useSearch";
 import { useQuery } from "@tanstack/react-query";
 
@@ -70,7 +69,7 @@ const MealsPage = () => {
                   </motion.div>
                 ))
               ) : (
-                <MealCardSkeleton />
+                <CardSkeleton />
               )}
             </div>
           )}
