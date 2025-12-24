@@ -1,9 +1,12 @@
 import React from "react";
 import { navLinks } from "@/constants";
 import { Link, NavLink } from "react-router";
-import { User } from "lucide-react";
+import { Layout, User } from "lucide-react";
+import useAuth from "@/hook/useAuth";
 
 const MobileMenu = (isLoggedIn, setIsMenuOpen) => {
+  const { signOutUser } = useAuth();
+
   return (
     <div className="absolute top-full left-0 right-0 bg-base-100 border-b border-base-300 md:hidden animate-[fadeIn_0.2s_ease-out]">
       <ul className="menu p-4">
@@ -24,6 +27,12 @@ const MobileMenu = (isLoggedIn, setIsMenuOpen) => {
         {isLoggedIn ? (
           <>
             <li>
+              <Link to="/dashboard">
+                <Layout className="w-4 h-4" />
+                Dashboard
+              </Link>
+            </li>
+            <li>
               <Link
                 to="/dashboard/profile"
                 onClick={() => setIsMenuOpen(false)}
@@ -32,7 +41,7 @@ const MobileMenu = (isLoggedIn, setIsMenuOpen) => {
                 Profile
               </Link>
             </li>
-            <li>
+            <li onClick={signOutUser}>
               <a className="text-error">Logout</a>
             </li>
           </>

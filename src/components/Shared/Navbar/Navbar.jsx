@@ -9,8 +9,8 @@ import useAuth from "@/hook/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, userProfile } = useAuth();
-  const isLoggedIn = false;
+  const { user, userProfile, signOutUser } = useAuth();
+  const isLoggedIn = user && userProfile;
 
   return (
     <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-300 fixed top-0 left-0 right-0 z-50 ">
@@ -98,7 +98,7 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <div className="divider my-1"></div>
-                    <li>
+                    <li onClick={signOutUser}>
                       <a className="text-error">Logout</a>
                     </li>
                   </ul>
