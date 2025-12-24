@@ -1,23 +1,72 @@
 import { motion } from "motion/react";
 import { ShoppingCart, CreditCard, MapPin, Clock, ChefHat } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { meals } from "../../constants";
 import OrderForm from "./OrderForm/OrderForm";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
+import { useNavigate, useSearchParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { getMealDetails } from "@/services/MealService";
+import { useForm, useWatch } from "react-hook-form";
+import useAuth from "@/hook/useAuth";
+import { createOrder } from "@/services/OrderService";
+import toast from "react-hot-toast";
 
 const OrderPage = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [searchParams, _setSearchParams] = useSearchParams();
+  const { userProfile } = useAuth();
+  const navigate = useNavigate();
+  const mealId = searchParams.get("mealId") ?? null;
+  const { data: selectedMeal } = useQuery({
+    queryKey: ["meal", mealId],
+    queryFn: () => getMealDetails(mealId),
+    keepPreviousData: true,
+  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { isLoading: isSubmitLoading, errors },
+  } = useForm({
+    defaultValues: {
+      quantity: 1,
+      userAddress: "",
+    },
+  });
 
-  const selectedMeal = meals[0];
+  const handleOrderSubmit = async (data) => {
+    const payload = {
+      mealId: selectedMeal._id || null,
+      quantity: Number(data.quantity || 1),
+      userAddress: data.userAddress || "",
+    };
+    const result = await createOrder(payload);
+    if (result.success) {
+      toast.success(
+        result.message || "Order create successful, Please pay now."
+      );
+      reset({
+        quantity: 1,
+        userAddress: "",
+      });
+      navigate("/dashboard/orders");
+    } else {
+      toast.error(result.message || "Order create failed, Please try again.");
+    }
+  };
+
+  const quantity = Number(useWatch({ control, name: "quantity" }) || 1);
   const orderData = {
-    mealName: selectedMeal.foodName,
-    chefName: selectedMeal.chefName,
-    chefId: selectedMeal.chefId,
-    price: selectedMeal.price,
-    userEmail: "john@example.com",
-    quantity: 2,
-    totalPrice: selectedMeal.price * 2,
+    mealName: selectedMeal?.foodName ?? "",
+    chefName: selectedMeal?.chefName ?? "",
+    chefId: selectedMeal?.chefId ?? "",
+    price: selectedMeal?.price ?? 0,
+    userEmail: userProfile.email ?? "",
+    quantity: quantity ?? 1,
+    totalPrice: Number(selectedMeal?.price ?? 0) * quantity,
   };
 
   return (
@@ -41,15 +90,22 @@ const OrderPage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <OrderForm orderData={orderData}></OrderForm>
+          <form
+            onSubmit={handleSubmit(handleOrderSubmit)}
+            className="grid md:grid-cols-2 gap-8"
+          >
+            <OrderForm
+              register={register}
+              errors={errors}
+              orderData={orderData}
+            ></OrderForm>
 
             <OrderSummary
               orderData={orderData}
               selectedMeal={selectedMeal}
-              setShowConfirmation={setShowConfirmation}
+              isSubmitLoading={isSubmitLoading}
             ></OrderSummary>
-          </div>
+          </form>
         </motion.div>
       </div>
 

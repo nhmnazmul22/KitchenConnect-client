@@ -3,7 +3,7 @@ import React from "react";
 import Input from "@/components/common/UI/Input";
 import Textarea from "@/components/common/UI/Textarea";
 
-const OrderForm = ({ orderData }) => {
+const OrderForm = ({ register, orderData, errors }) => {
   return (
     <div className="space-y-6">
       <div className="card bg-base-100 shadow-md border border-base-300">
@@ -54,7 +54,20 @@ const OrderForm = ({ orderData }) => {
             </div>
             <div className="form-control">
               <label className="label">Quantity</label>
-              <Input type="number" defaultValue={2} min={1} max={10}></Input>
+              <Input
+                type="number"
+                defaultValue={2}
+                min={1}
+                max={10}
+                {...register("quantity", {
+                  required: { value: true, message: "Quantity is required" },
+                })}
+              ></Input>
+              {errors?.quantity && (
+                <span className="text-sm text-red-500 mt-1 block">
+                  {errors?.quantity?.message}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -72,18 +85,17 @@ const OrderForm = ({ orderData }) => {
               <label className="label">
                 <span className="label-text">Delivery Address</span>
               </label>
-              <Textarea placeholder="123 Main St, Apt 4B, Downtown"></Textarea>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="form-control">
-                <label className="label">Phone Number</label>
-                <Input type="tel" placeholder="+1 (555) 000-0000"></Input>
-              </div>
-              <div className="form-control">
-                <label className="label">Special Instructions</label>
-                <Input type="text" placeholder="Any special requests?"></Input>
-              </div>
+              <Textarea
+                placeholder="123 Main St, Apt 4B, Downtown"
+                {...register("userAddress", {
+                  required: { value: true, message: "Address is required" },
+                })}
+              ></Textarea>
+              {errors?.userAddress && (
+                <span className="text-sm text-red-500 mt-1 block">
+                  {errors?.userAddress?.message}
+                </span>
+              )}
             </div>
           </div>
         </div>
