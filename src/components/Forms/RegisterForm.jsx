@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { uploadFile } from "@/lib/fileUploadHelper";
 import toast from "react-hot-toast";
 import { saveUser } from "@/services/UserService";
-import useAuth from "@/hook/useAuth";
+import useAuth from "@/hooks/useAuth";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);

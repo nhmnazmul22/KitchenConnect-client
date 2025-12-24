@@ -20,19 +20,40 @@ import ManageUsersPage from "@/pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import RoleRequestsPage from "@/pages/Dashboard/Admin/RoleRequests/RoleRequests";
 import StatisticsPage from "@/pages/Dashboard/Admin/Statistics/Statistics";
 import GuestGuard from "./GustGurd";
+import PrivateRoute from "./PrivateRoute";
+import UserRoute from "./UserRoute";
+import ChefRoute from "./ChefRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    ErrorBoundary: <div>Error page</div>,
     children: [
       {
         index: true,
         element: <HomePage></HomePage>,
       },
       { path: "/meals", element: <MealsPage></MealsPage> },
-      { path: "/meals/:id", element: <MealDetailsPage></MealDetailsPage> },
-      { path: "/create-order", element: <CreateOrderPage></CreateOrderPage> },
+      {
+        path: "/meals/:id",
+        element: (
+          <PrivateRoute>
+            <MealDetailsPage></MealDetailsPage>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/create-order",
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <CreateOrderPage></CreateOrderPage>
+            </UserRoute>
+          </PrivateRoute>
+        ),
+      },
       { path: "*", element: <NotFound></NotFound> },
     ],
   },
@@ -50,32 +71,97 @@ const router = createBrowserRouter([
       },
       { path: "login", element: <LoginPage></LoginPage> },
       { path: "register", element: <RegisterPage></RegisterPage> },
+      { path: "*", element: <NotFound></NotFound> },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
         element: <Navigate to="/dashboard/profile"></Navigate>,
       },
       { path: "profile", element: <ProfilePage></ProfilePage> },
-      { path: "orders", element: <OrdersPage></OrdersPage> },
-      { path: "reviews", element: <ReviewsPage></ReviewsPage> },
-      { path: "favorites", element: <FavoritesPage></FavoritesPage> },
-      { path: "create-meal", element: <CreateMealPage></CreateMealPage> },
-      { path: "my-meals", element: <ChefMealsPage></ChefMealsPage> },
+      {
+        path: "orders",
+        element: (
+          <UserRoute>
+            <OrdersPage></OrdersPage>
+          </UserRoute>
+        ),
+      },
+      {
+        path: "reviews",
+        element: (
+          <UserRoute>
+            <ReviewsPage></ReviewsPage>
+          </UserRoute>
+        ),
+      },
+      {
+        path: "favorites",
+        element: (
+          <UserRoute>
+            <FavoritesPage></FavoritesPage>
+          </UserRoute>
+        ),
+      },
+      {
+        path: "create-meal",
+        element: (
+          <ChefRoute>
+            <CreateMealPage></CreateMealPage>
+          </ChefRoute>
+        ),
+      },
+      {
+        path: "my-meals",
+        element: (
+          <ChefRoute>
+            <ChefMealsPage></ChefMealsPage>
+          </ChefRoute>
+        ),
+      },
       {
         path: "order-requests",
-        element: <OrderRequestsPage></OrderRequestsPage>,
+        element: (
+          <ChefRoute>
+            <OrderRequestsPage></OrderRequestsPage>
+          </ChefRoute>
+        ),
       },
-      { path: "users", element: <ManageUsersPage></ManageUsersPage> },
-      { path: "requests", element: <RoleRequestsPage></RoleRequestsPage> },
-      { path: "statistics", element: <StatisticsPage></StatisticsPage> },
+      {
+        path: "users",
+        element: (
+          <AdminRoute>
+            <ManageUsersPage></ManageUsersPage>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "requests",
+        element: (
+          <AdminRoute>
+            <RoleRequestsPage></RoleRequestsPage>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "statistics",
+        element: (
+          <AdminRoute>
+            <StatisticsPage></StatisticsPage>
+          </AdminRoute>
+        ),
+      },
+      { path: "*", element: <NotFound></NotFound> },
     ],
   },
-  { path: "*", element: <NotFound></NotFound> },
 ]);
 
 export default router;

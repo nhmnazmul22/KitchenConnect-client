@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import Select from "@/components/common/UI/Select";
 import Input from "@/components/common/UI/Input";
-import useSearch from "@/hook/useSearch";
+import useSearch from "@/hooks/useSearch";
 import { useState } from "react";
 
 const sortOptions = [

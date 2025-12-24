@@ -2,7 +2,7 @@ import { Star } from "lucide-react";
 import { useState } from "react";
 import Textarea from "../common/UI/Textarea";
 import { useParams } from "react-router";
-import useAuth from "@/hook/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { createReview } from "@/services/ReviewService";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

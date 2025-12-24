@@ -5,7 +5,7 @@ import PageHeader from "@/components/Shared/Header/PageHeader";
 import SearchFilter from "./SearchFilter/SearchFilter";
 import { getMeals } from "@/services/MealService";
 import CardSkeleton from "@/components/Fallback/CardSkeleton";
-import useSearch from "@/hook/useSearch";
+import useSearch from "@/hooks/useSearch";
 import { useQuery } from "@tanstack/react-query";
 
 const MealsPage = () => {

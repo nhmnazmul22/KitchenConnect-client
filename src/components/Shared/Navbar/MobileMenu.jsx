@@ -2,7 +2,7 @@ import React from "react";
 import { navLinks } from "@/constants";
 import { Link, NavLink } from "react-router";
 import { Layout, User } from "lucide-react";
-import useAuth from "@/hook/useAuth";
+import useAuth from "@/hooks/useAuth";
 
 const MobileMenu = (isLoggedIn, setIsMenuOpen) => {
   const { signOutUser } = useAuth();

@@ -5,7 +5,7 @@ import ThemeToggle from "../../Theme/ThemeToggle";
 import { navLinks } from "@/constants";
 import MobileMenu from "./MobileMenu";
 import Logo from "../../common/Logo/Logo";
-import useAuth from "@/hook/useAuth";
+import useAuth from "@/hooks/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

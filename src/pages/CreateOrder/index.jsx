@@ -9,7 +9,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getMealDetails } from "@/services/MealService";
 import { useForm, useWatch } from "react-hook-form";
-import useAuth from "@/hook/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { createOrder } from "@/services/OrderService";
 import toast from "react-hot-toast";
 

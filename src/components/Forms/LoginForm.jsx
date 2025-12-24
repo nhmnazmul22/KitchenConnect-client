@@ -3,7 +3,7 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import Input from "@/components/common/UI/Input";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import useAuth from "@/hook/useAuth";
+import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
 
 const LoginForm = () => {
