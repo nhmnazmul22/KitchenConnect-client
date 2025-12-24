@@ -1,19 +1,6 @@
-import { Star } from "lucide-react";
+import Stars from "../common/UI/Stars";
 
 const ReviewCard = ({ review, showMealName = false }) => {
-  const renderStars = (rating) => {
-    return Array(5)
-      .fill(0)
-      .map((_, i) => (
-        <Star
-          key={i}
-          className={`w-4 h-4 ${
-            i < rating ? "text-warning fill-warning" : "text-base-300"
-          }`}
-        />
-      ));
-  };
-
   return (
     <div className="card bg-base-100 shadow-md card-elevated">
       <div className="card-body p-5">
@@ -33,9 +20,7 @@ const ReviewCard = ({ review, showMealName = false }) => {
               </p>
             )}
 
-            <div className="flex gap-0.5 mb-3">
-              {renderStars(review.rating)}
-            </div>
+            <div className="flex gap-0.5 mb-3">{Stars(review.rating)}</div>
 
             <p className="text-sm opacity-70 leading-relaxed">
               "{review.comment}"
