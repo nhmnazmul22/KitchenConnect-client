@@ -5,12 +5,13 @@ import {
   ChefHat,
   ShoppingCart,
   Leaf,
+  Loader2,
 } from "lucide-react";
 import Stars from "@/components/common/UI/Stars";
 import { motion } from "motion/react";
-import { Link } from "react-router";
+import { Link } from "react-router";;
 
-const MealInfo = ({ meal, mealReviews }) => {
+const MealInfo = ({ meal, mealReviews, loading, handleFavorite }) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: 30 }}
@@ -40,7 +41,7 @@ const MealInfo = ({ meal, mealReviews }) => {
         <div>
           <p className="font-semibold text-foreground">{meal.chefName}</p>
           <p className="text-sm text-muted-foreground">
-            Chef ID: #{meal.chefId} • {meal.experience} experience
+            Chef ID: #{meal.chefId} • {meal.chefExperience} experience
           </p>
         </div>
       </div>
@@ -49,7 +50,9 @@ const MealInfo = ({ meal, mealReviews }) => {
         <div className="card bg-background shadow-sm p-4 rounded-xl border border-neutral-200">
           <Clock className="w-5 h-5 text-primary mb-2" />
           <p className="text-sm text-muted-foreground">Delivery Time</p>
-          <p className="font-semibold text-foreground">{meal.deliveryTime}</p>
+          <p className="font-semibold text-foreground">
+            {meal.estimatedDeliveryTime}
+          </p>
         </div>
         <div className="card bg-base-100 shadow-sm p-4 rounded-xl border border-neutral-200">
           <MapPin className="w-5 h-5 text-primary mb-2" />
@@ -86,9 +89,15 @@ const MealInfo = ({ meal, mealReviews }) => {
           </p>
         </div>
         <div className="flex gap-3">
-          <button className="btn btn-outline">
-            <Heart className="w-4 h-4 mr-2" />
-            Favorite
+          <button onClick={handleFavorite} className="btn btn-outline">
+            {loading ? (
+              <Loader2 className="w-4 h-4 mr-2" />
+            ) : (
+              <>
+                <Heart className="w-4 h-4 mr-2" />
+                <span>Favorite</span>
+              </>
+            )}
           </button>
           <Link to="/create-order">
             <button className="btn btn-primary btn-shine">

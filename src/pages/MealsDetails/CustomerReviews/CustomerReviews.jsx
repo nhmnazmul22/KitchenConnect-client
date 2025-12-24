@@ -2,10 +2,14 @@ import { useRef } from "react";
 import ReviewCard from "@/components/Reviews/ReviewCard";
 import WriteReview from "@/components/Reviews/WriteReviewModal";
 import { motion } from "motion/react";
+import CardSkeleton from "@/components/Fallback/CardSkeleton";
 
-const CustomerReviews = ({ mealReviews }) => {
+const CustomerReviews = ({
+  mealReviews = [],
+  loading = false,
+  isError = false,
+}) => {
   const ModalRef = useRef(null);
-
   const handelShowModal = () => {
     ModalRef.current.showModal();
   };
@@ -30,9 +34,23 @@ const CustomerReviews = ({ mealReviews }) => {
         <WriteReview ref={ModalRef}></WriteReview>
       </div>
 
-      {mealReviews?.length > 0 ? (
+      {!loading && (isError || mealReviews.length === 0) && (
+        <div className="text-center py-12 bg-muted/30 rounded-2xl">
+          <p className="text-muted-foreground">
+            No reviews yet. Be the first to share your experience!
+          </p>
+        </div>
+      )}
+
+      {loading && (
         <div className="grid md:grid-cols-3 gap-6">
-          {mealReviews?.map((review, index) => (
+          <CardSkeleton limit={3} />
+        </div>
+      )}
+
+      {!loading && !isError && mealReviews.length > 0 && (
+        <div className="grid md:grid-cols-3 gap-6">
+          {mealReviews.map((review, index) => (
             <motion.div
               key={review._id}
               initial={{ opacity: 0, y: 20 }}
@@ -43,13 +61,8 @@ const CustomerReviews = ({ mealReviews }) => {
             </motion.div>
           ))}
         </div>
-      ) : (
-        <div className="text-center py-12 bg-muted/30 rounded-2xl">
-          <p className="text-muted-foreground">
-            No reviews yet. Be the first to share your experience!
-          </p>
-        </div>
       )}
+
       <button
         className="btn btn-primary block sm:hidden mt-10"
         onClick={handelShowModal}
