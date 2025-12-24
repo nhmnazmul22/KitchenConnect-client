@@ -5,7 +5,10 @@ export const saveUser = async (userData) => {
     const response = await axiosInstance.post("/users", userData);
     return response.data;
   } catch (err) {
-    throw new Error(err?.message || "Saving user failed");
+    return {
+      success: false,
+      message: err?.response?.data?.message || "Saving user failed",
+    };
   }
 };
 
@@ -14,6 +17,9 @@ export const getProfile = async () => {
     const response = await axiosSecureInstance.get("/profile");
     return response.data;
   } catch (err) {
-    throw new Error(err?.message || "Saving user failed");
+    return {
+      success: false,
+      message: err?.response?.data?.message || "Failed to get profile data",
+    };
   }
 };

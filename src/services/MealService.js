@@ -13,6 +13,23 @@ export const getMeals = async (
     );
     return response.data.data;
   } catch (err) {
-    throw new Error(err?.message || "Failed to retrieved the meals data");
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message || "Failed to retrieved the meals data",
+    };
+  }
+};
+
+export const getMealDetails = async (id) => {
+  try {
+    const response = await axiosSecureInstance.get(`/meals/${id}`);
+    return response.data.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message || "Failed to retrieved the meal details",
+    };
   }
 };
