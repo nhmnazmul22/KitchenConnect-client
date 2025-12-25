@@ -18,7 +18,7 @@ export const sendRoleRequest = async (data) => {
 export const getRoleRequests = async () => {
   try {
     const response = await axiosSecureInstance.get(`/role-requests`);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     throw new Error(
       err?.response?.data?.message ||
@@ -28,10 +28,11 @@ export const getRoleRequests = async () => {
   }
 };
 
-export const updateRoleRequests = async (requestId) => {
+export const updateRoleRequests = async (requestId, data) => {
   try {
-    const response = await axiosSecureInstance.patch(
-      `/role-requests/${requestId}`
+    const response = await axiosSecureInstance.put(
+      `/role-requests/${requestId}`,
+      data
     );
     return response.data;
   } catch (err) {

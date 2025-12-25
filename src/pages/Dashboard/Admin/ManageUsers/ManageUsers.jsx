@@ -1,12 +1,9 @@
-import { AlertTriangle } from "lucide-react";
 import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
 import UsersTable from "./UsersTable/UsersTable";
-import useSearch from "@/hooks/useSearch";
 import { getUsers } from "@/services/UserService";
 import { useQuery } from "@tanstack/react-query";
 
 const ManageUsersPage = () => {
-  const { limit, skip, sort, order, search, _setSkip } = useSearch();
   const {
     data = { users: [], total: 0 },
     isLoading,
@@ -14,8 +11,8 @@ const ManageUsersPage = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["users", limit, skip, sort, order, search],
-    queryFn: () => getUsers(limit, skip, sort, order, search),
+    queryKey: ["users"],
+    queryFn: () => getUsers(),
     keepPreviousData: true,
   });
 
