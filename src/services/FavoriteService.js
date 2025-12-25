@@ -3,14 +3,13 @@ import { axiosSecureInstance } from "@/lib/axiosInstance";
 export const getFavoriteMeals = async () => {
   try {
     const response = await axiosSecureInstance.get(`/favorite-meals`);
-    return response.data;
+    return response.data.data;
   } catch (err) {
-    return {
-      success: false,
-      message:
-        err?.response?.data?.message ||
-        "Failed to retrieved favorite meals data",
-    };
+    throw new Error(
+      err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to retrieved favorite meals data"
+    );
   }
 };
 

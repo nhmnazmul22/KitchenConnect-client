@@ -27,7 +27,7 @@ export const getMyOrders = async () => {
 
 export const updateOrder = async (orderId, data) => {
   try {
-    const response = await axiosSecureInstance.post(`/orders/${orderId}`, data);
+    const response = await axiosSecureInstance.put(`/orders/${orderId}`, data);
     return response.data;
   } catch (err) {
     return {
@@ -39,10 +39,9 @@ export const updateOrder = async (orderId, data) => {
 
 export const updateOrderStatus = async (orderId, status) => {
   try {
-    const response = await axiosSecureInstance.post(
-      `/order-status/${orderId}`,
-      { orderStatus: status }
-    );
+    const response = await axiosSecureInstance.put(`/order-status/${orderId}`, {
+      orderStatus: status,
+    });
     return response.data;
   } catch (err) {
     return {
