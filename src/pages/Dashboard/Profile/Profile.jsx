@@ -3,9 +3,35 @@ import ProfileInfo from "@/components/Profile/ProfileInfo";
 import RoleRequestBtn from "@/components/Profile/RoleRequestBtn";
 import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
 import useAuth from "@/hooks/useAuth";
+import { sendRoleRequest } from "@/services/RequestRoleService";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const ProfilePage = () => {
   const { userProfile } = useAuth();
+  const [loading, setLoading] = useState(false);
+
+  const handleSendRoleRequest = async (requestType) => {
+    try {
+      setLoading(true);
+      const payload = {
+        userName: userProfile.name,
+        userEmail: userProfile.email,
+        requestType,
+      };
+      const result = await sendRoleRequest(payload);
+      console.log(result);
+      if (result.success) {
+        toast.success(result.message || "Role request send successful");
+        return;
+      } else {
+        toast.error(result.message || "Role request send failed");
+        return;
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -27,6 +53,8 @@ const ProfilePage = () => {
               subTitle="Start selling your home-cooked meals"
               icon={<ChefHat className="w-6 h-6 text-secondary" />}
               btnLabel="Request Chef Access"
+              loading={loading}
+              onClick={() => handleSendRoleRequest("chef")}
             ></RoleRequestBtn>
           )}
           <RoleRequestBtn
@@ -35,6 +63,8 @@ const ProfilePage = () => {
             icon={<Shield className="w-6 h-6 text-primary" />}
             btnLabel="Request Admin Access"
             btnClasses="btn-secondary"
+            loading={loading}
+            onClick={() => handleSendRoleRequest("admin")}
           ></RoleRequestBtn>
         </div>
       )}

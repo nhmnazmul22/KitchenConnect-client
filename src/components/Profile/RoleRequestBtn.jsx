@@ -1,9 +1,12 @@
+import { Loader2 } from "lucide-react";
+
 const RoleRequestBtn = ({
   icon,
   title,
   subTitle,
   btnLabel,
   btnClasses,
+  loading,
   ...BtnProps
 }) => {
   return (
@@ -23,7 +26,7 @@ const RoleRequestBtn = ({
         className={`btn btn-primary btn-shine w-full ${btnClasses}`}
         {...BtnProps}
       >
-        {btnLabel}
+        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : btnLabel}
       </button>
     </div>
   );
