@@ -23,3 +23,31 @@ export const getProfile = async () => {
     };
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const response = await axiosSecureInstance.get("/users");
+    return response.data.data;
+  } catch (err) {
+    throw new Error(
+      err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to retrieved users data"
+    );
+  }
+};
+
+export const updateUser = async (userId, data) => {
+  try {
+    const response = await axiosSecureInstance.put(`/users/${userId}`, data);
+    return response.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to get profile data",
+    };
+  }
+};
