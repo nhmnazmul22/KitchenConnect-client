@@ -39,7 +39,7 @@ export const getReviews = async () => {
 
 export const updateReview = async (reviewId, data) => {
   try {
-    const response = await axiosSecureInstance.post(
+    const response = await axiosSecureInstance.put(
       `/update-review/${reviewId}`,
       data
     );
