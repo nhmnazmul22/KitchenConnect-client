@@ -37,7 +37,7 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
               </div>
               <div className="text-right">
                 <p className="font-bold text-lg text-primary">
-                  ${order.price.toFixed(2)}
+                  ${Number(order.price).toFixed(2)}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   Qty: {order.quantity}
@@ -48,10 +48,11 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
             <div className="flex flex-wrap gap-2">
               <span
                 className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                  order.status
+                  order.orderStatus
                 )}`}
               >
-                {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                {order.orderStatus.charAt(0).toUpperCase() +
+                  order.orderStatus.slice(1)}
               </span>
               <span
                 className={`px-3 py-1 rounded-full text-xs font-medium ${getPaymentColor(
@@ -66,12 +67,8 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs text-muted-foreground">
               <span className="flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" />
-                {order.deliveryTime}
-              </span>
-              <span className="flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5" />
-                {order.address}
+                {order.userAddress}
               </span>
             </div>
           </div>
@@ -81,7 +78,7 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
           <div className="mt-4 pt-4 border-t border-base-300 flex flex-wrap gap-2">
             {isChefView ? (
               <>
-                {order.status === "pending" && (
+                {order.orderStatus === "pending" && (
                   <>
                     <button className="btn btn-outline btn-sm flex-1 sm:flex-none">
                       Cancel
@@ -91,7 +88,7 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
                     </button>
                   </>
                 )}
-                {order.status === "preparing" && (
+                {order.orderStatus === "preparing" && (
                   <button className="btn btn-primary btn-sm flex-1 sm:flex-none">
                     Mark Delivered
                   </button>
@@ -104,7 +101,7 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
                     Pay Now
                   </button>
                 )}
-                {order.status === "delivered" && (
+                {order.orderStatus === "delivered" && (
                   <button className="btn btn-outline">Leave Review</button>
                 )}
               </>

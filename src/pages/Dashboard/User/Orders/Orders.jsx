@@ -1,8 +1,21 @@
+import CardSkeleton from "@/components/Fallback/CardSkeleton";
 import OrderCard from "@/components/Orders/OrderCard";
 import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
-import { orders } from "@/constants";
+import { getMyOrders } from "@/services/OrderService";
+import { useQuery } from "@tanstack/react-query";
 
 const OrdersPage = () => {
+  const {
+    data: result,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["my-orders"],
+    queryFn: () => getMyOrders(),
+    keepPreviousData: true,
+  });
+
   return (
     <div>
       <DashboardPageHeader
@@ -10,17 +23,23 @@ const OrdersPage = () => {
         subTitle="Track and manage your meal orders"
       ></DashboardPageHeader>
 
-      <div className="grid md:grid-cols-2 gap-5 space-y-4">
-        {orders.map((order) => (
-          <OrderCard key={order._id} order={order} />
-        ))}
-      </div>
-
-      {orders.length === 0 && (
+      {!result && isError && (
         <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
           <p className="text-muted-foreground">
-            You haven't placed any orders yet.
+            {error.message || "You haven't placed any orders yet."}
           </p>
+        </div>
+      )}
+
+      {!isError && (
+        <div className="grid md:grid-cols-2 gap-5 space-y-4">
+          {result?.data && result?.data?.length > 0 && !isLoading ? (
+            result?.data?.map((order) => (
+              <OrderCard key={order._id} order={order} />
+            ))
+          ) : (
+            <CardSkeleton limit={4} />
+          )}
         </div>
       )}
     </div>
