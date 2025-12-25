@@ -23,3 +23,51 @@ export const createReview = async (data) => {
     };
   }
 };
+
+export const getReviews = async () => {
+  try {
+    const response = await axiosSecureInstance.get(`/reviews`);
+    return response.data.data;
+  } catch (err) {
+    throw new Error(
+      err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to retrieved reviews"
+    );
+  }
+};
+
+export const updateReview = async (reviewId, data) => {
+  try {
+    const response = await axiosSecureInstance.post(
+      `/update-review/${reviewId}`,
+      data
+    );
+    return response.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to update review",
+    };
+  }
+};
+
+export const removeReview = async (reviewId) => {
+  try {
+    const response = await axiosSecureInstance.delete(
+      `/delete-review/${reviewId}`
+    );
+    return response.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to delete review",
+    };
+  }
+};
