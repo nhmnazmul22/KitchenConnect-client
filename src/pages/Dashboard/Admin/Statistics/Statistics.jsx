@@ -1,4 +1,4 @@
-import { Users, DollarSign, ShoppingBag, TrendingUp } from "lucide-react";
+import { Users, DollarSign, ShoppingBag, Truck } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -12,28 +12,53 @@ import {
   Cell,
   Legend,
 } from "recharts";
-import { platformStats } from "@/constants";
 import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
 import StatCard from "@/components/Statistics/StatCard";
+import { getStatistics } from "@/services/StatisticsService";
+import { useQuery } from "@tanstack/react-query";
+import { monthNames } from "@/constants";
 
 const StatisticsPage = () => {
+  const {
+    data = {
+      totalPayment: 0,
+      totalUsers: 0,
+      ordersPending: { data: [], count: 0 },
+      ordersDelivered: { data: [], count: 0 },
+    },
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["statistics"],
+    queryFn: () => getStatistics(),
+    keepPreviousData: true,
+  });
+
   const pieData = [
     {
       name: "Delivered",
-      value: platformStats.deliveredOrders,
+      value: data?.ordersDelivered?.count,
       color: "hsl(100, 45%, 35%)",
     },
     {
       name: "Pending",
-      value: platformStats.pendingOrders,
+      value: data?.ordersPending?.count,
       color: "hsl(38, 92%, 55%)",
     },
-    {
-      name: "Cancelled",
-      value: platformStats.cancelledOrders,
-      color: "hsl(0, 84%, 60%)",
-    },
   ];
+
+  const allOrders = data.ordersDelivered.data;
+  const monthlyData = monthNames.map((month) => ({
+    month,
+    orders: 0,
+    revenue: 0,
+  }));
+  allOrders.forEach((order) => {
+    const date = new Date(order.createdAt);
+    const monthIndex = date.getMonth();
+    monthlyData[monthIndex].orders += order.quantity;
+    monthlyData[monthIndex].revenue += order.price * order.quantity;
+  });
 
   return (
     <div className="">
@@ -42,32 +67,40 @@ const StatisticsPage = () => {
         subTitle="Overview of platform performance and metrics"
       ></DashboardPageHeader>
 
+      {(!data || isError) && (
+        <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
+          <p className="text-muted-foreground">
+            {error?.message || "Role requests not found!!"}
+          </p>
+        </div>
+      )}
+
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-y-2 sm:gap-4 mb-8">
         <StatCard
           title="Total Users"
-          value={platformStats.totalUsers.toLocaleString()}
+          value={data?.totalUsers?.toLocaleString()}
           icon={<Users className="w-6 h-6" />}
           trend={{ value: 12, isPositive: true }}
           color="primary"
         />
         <StatCard
-          title="Total Chefs"
-          value={platformStats.totalChefs.toLocaleString()}
-          icon={<TrendingUp className="w-6 h-6" />}
+          title="Total Payments"
+          value={data?.totalPayment?.toFixed(2)}
+          icon={<DollarSign className="w-6 h-6" />}
           trend={{ value: 8, isPositive: true }}
           color="secondary"
         />
         <StatCard
-          title="Total Orders"
-          value={platformStats.totalOrders.toLocaleString()}
+          title="Total Pending Orders"
+          value={data?.ordersPending?.count?.toLocaleString()}
           icon={<ShoppingBag className="w-6 h-6" />}
           trend={{ value: 15, isPositive: true }}
           color="accent"
         />
         <StatCard
-          title="Total Revenue"
-          value={`$${platformStats.totalRevenue.toLocaleString()}`}
-          icon={<DollarSign className="w-6 h-6" />}
+          title="Total Delivered Orders"
+          value={data?.ordersDelivered?.count?.toLocaleString()}
+          icon={<Truck className="w-6 h-6" />}
           trend={{ value: 23, isPositive: true }}
           color="primary"
         />
@@ -80,7 +113,7 @@ const StatisticsPage = () => {
           </h3>
           <div className="w-full h-75">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={platformStats.monthlyData}>
+              <BarChart data={monthlyData}>
                 <CartesianGrid
                   strokeDasharray="3 3"
                   stroke="hsl(30, 20%, 88%)"
@@ -152,27 +185,6 @@ const StatisticsPage = () => {
               </PieChart>
             </ResponsiveContainer>
           </div>
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-3 gap-y-4 sm:gap-4 mt-6">
-        <div className="bg-base-100 rounded-2xl p-6 border border-base-300 text-center">
-          <p className="text-3xl font-bold text-secondary">
-            {platformStats.deliveredOrders.toLocaleString()}
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">Delivered Orders</p>
-        </div>
-        <div className="bg-base-100 rounded-2xl p-6 border border-base-300 text-center">
-          <p className="text-3xl font-bold text-accent">
-            {platformStats.pendingOrders}
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">Pending Orders</p>
-        </div>
-        <div className="bg-base-100 rounded-2xl p-6 border border-base-300 text-center">
-          <p className="text-3xl font-bold text-destructive">
-            {platformStats.cancelledOrders}
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">Cancelled Orders</p>
         </div>
       </div>
     </div>
