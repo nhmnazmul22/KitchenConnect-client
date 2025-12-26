@@ -16,7 +16,9 @@ export const getMeals = async (
     return {
       success: false,
       message:
-        err?.response?.data?.message || "Failed to retrieved the meals data",
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to retrieved the meals data",
     };
   }
 };
@@ -29,7 +31,77 @@ export const getMealDetails = async (id) => {
     return {
       success: false,
       message:
-        err?.response?.data?.message || "Failed to retrieved the meal details",
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to retrieved the meal details",
+    };
+  }
+};
+
+export const getMyMeals = async (
+  limit = 10,
+  skip = 0,
+  sort = "createAt",
+  order = "desc",
+  search = ""
+) => {
+  try {
+    const response = await axiosSecureInstance.get(
+      `/my-meals?limit=${limit}&skip=${skip}&sort=${sort}&order=${order}&search=${search}`
+    );
+    return response.data.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to retrieved the meals data",
+    };
+  }
+};
+
+export const createMeal = async (data) => {
+  try {
+    const response = await axiosSecureInstance.post(`/meals`, data);
+    return response.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to create meal",
+    };
+  }
+};
+
+export const updateMeal = async (mealId, data) => {
+  try {
+    const response = await axiosSecureInstance.put(`/meals/${mealId}`, data);
+    return response.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to update meal",
+    };
+  }
+};
+
+export const deleteMeal = async (mealId) => {
+  try {
+    const response = await axiosSecureInstance.delete(`/meals/${mealId}`);
+    return response.data;
+  } catch (err) {
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to delete meal",
     };
   }
 };
