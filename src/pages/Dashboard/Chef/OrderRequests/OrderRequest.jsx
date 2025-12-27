@@ -4,17 +4,25 @@ import { getOrders } from "@/services/OrderService";
 import { useQuery } from "@tanstack/react-query";
 import CardSkeleton from "@/components/Fallback/CardSkeleton";
 import Pagination from "@/components/common/UI/Pagination";
+import useSearch from "@/hooks/useSearch";
+import { useEffect } from "react";
 const OrderRequestsPage = () => {
+  const { limit, skip, setLimit, setSkip } = useSearch();
   const {
     data = { orders: [], total: 0 },
     isLoading,
     isError,
     error,
   } = useQuery({
-    queryKey: ["my-orders"],
-    queryFn: () => getOrders(),
+    queryKey: ["orders", limit, skip],
+    queryFn: () => getOrders(limit, skip),
     keepPreviousData: true,
   });
+
+  useEffect(() => {
+    setLimit(10);
+    setSkip(0);
+  }, [setLimit, setSkip]);
 
   return (
     <div className="pr-5">

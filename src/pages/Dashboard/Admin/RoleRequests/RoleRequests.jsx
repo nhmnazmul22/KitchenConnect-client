@@ -2,8 +2,12 @@ import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader"
 import { useQuery } from "@tanstack/react-query";
 import { getRoleRequests } from "@/services/RequestRoleService";
 import RoleRequestTable from "./RoleRequestTable/RoleRequestTable";
+import Pagination from "@/components/common/UI/Pagination";
+import useSearch from "@/hooks/useSearch";
+import { useEffect } from "react";
 
 const RoleRequestsPage = () => {
+  const { limit, skip, setLimit, setSkip } = useSearch();
   const {
     data = { requests: [], total: 0 },
     isLoading,
@@ -11,10 +15,15 @@ const RoleRequestsPage = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["requests"],
-    queryFn: () => getRoleRequests(),
+    queryKey: ["requests", limit, skip],
+    queryFn: () => getRoleRequests(limit, skip),
     keepPreviousData: true,
   });
+
+  useEffect(() => {
+    setLimit(10);
+    setSkip(0);
+  }, [setLimit, setSkip]);
 
   return (
     <div>
@@ -38,6 +47,10 @@ const RoleRequestsPage = () => {
           refetch={refetch}
         />
       )}
+
+      <div className="col-span-1 sm:col-span-2 lg:col-span-3">
+        {!isError && <Pagination total={data?.total} />}
+      </div>
     </div>
   );
 };

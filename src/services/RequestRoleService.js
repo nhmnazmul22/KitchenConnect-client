@@ -15,9 +15,11 @@ export const sendRoleRequest = async (data) => {
   }
 };
 
-export const getRoleRequests = async () => {
+export const getRoleRequests = async (limit = 10, skip = 0) => {
   try {
-    const response = await axiosSecureInstance.get(`/role-requests`);
+    const response = await axiosSecureInstance.get(
+      `/role-requests?limit=${limit}&skip=${skip}`
+    );
     return response.data.data;
   } catch (err) {
     throw new Error(

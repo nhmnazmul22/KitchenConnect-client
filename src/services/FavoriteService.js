@@ -1,8 +1,10 @@
 import { axiosSecureInstance } from "@/lib/axiosInstance";
 
-export const getFavoriteMeals = async () => {
+export const getFavoriteMeals = async (limit = 10, skip = 0) => {
   try {
-    const response = await axiosSecureInstance.get(`/favorite-meals`);
+    const response = await axiosSecureInstance.get(
+      `/favorite-meals?limit=${limit}&skip=${skip}`
+    );
     return response.data.data;
   } catch (err) {
     throw new Error(

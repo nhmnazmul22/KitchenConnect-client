@@ -18,6 +18,7 @@ const MealDetailsPage = () => {
     data: meal,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["meal", id],
     queryFn: () => getMealDetails(id),
@@ -93,6 +94,7 @@ const MealDetailsPage = () => {
           mealReviews={mealReviews}
           loading={reviewsLoading}
           error={reviewsError}
+          refetch={refetch}
         ></CustomerReviews>
       </div>
     </div>

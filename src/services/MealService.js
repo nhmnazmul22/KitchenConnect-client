@@ -13,13 +13,11 @@ export const getMeals = async (
     );
     return response.data.data;
   } catch (err) {
-    return {
-      success: false,
-      message:
-        err?.response?.data?.message ||
+    throw new Error(
+      err?.response?.data?.message ||
         err.response.statusText ||
-        "Failed to retrieved the meals data",
-    };
+        "Failed to retrieved the meals data"
+    );
   }
 };
 
@@ -28,13 +26,11 @@ export const getMealDetails = async (id) => {
     const response = await axiosSecureInstance.get(`/meals/${id}`);
     return response.data.data;
   } catch (err) {
-    return {
-      success: false,
-      message:
-        err?.response?.data?.message ||
+    throw new Error(
+      err?.response?.data?.message ||
         err.response.statusText ||
-        "Failed to retrieved the meal details",
-    };
+        "Failed to retrieved the meals data"
+    );
   }
 };
 
@@ -51,13 +47,11 @@ export const getMyMeals = async (
     );
     return response.data.data;
   } catch (err) {
-    return {
-      success: false,
-      message:
-        err?.response?.data?.message ||
+    throw new Error(
+      err?.response?.data?.message ||
         err.response.statusText ||
-        "Failed to retrieved the meals data",
-    };
+        "Failed to retrieved the meals data"
+    );
   }
 };
 

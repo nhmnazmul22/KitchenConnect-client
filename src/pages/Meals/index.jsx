@@ -7,9 +7,10 @@ import { getMeals } from "@/services/MealService";
 import CardSkeleton from "@/components/Fallback/CardSkeleton";
 import useSearch from "@/hooks/useSearch";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const MealsPage = () => {
-  const { limit, skip, sort, order, search, setSkip } = useSearch();
+  const { limit, skip, sort, order, search, setSkip, setLimit } = useSearch();
   const {
     data = { meals: [], total: 0 },
     isLoading,
@@ -27,6 +28,11 @@ const MealsPage = () => {
   const handlePageChange = (page) => {
     setSkip((page - 1) * limit);
   };
+
+  useEffect(() => {
+    setLimit(9);
+    setSkip(0);
+  }, [setLimit, setSkip]);
 
   return (
     <div className="bg-base-1000">
@@ -49,7 +55,7 @@ const MealsPage = () => {
             </p>
           </div>
 
-          {data?.meals?.length === 0 && isError && (
+          {(!data?.meals || isError) && (
             <div className="text-center my-10 text-base">
               <p>Meals not found, Please try again</p>
             </div>

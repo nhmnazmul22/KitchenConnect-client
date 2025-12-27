@@ -1,3 +1,4 @@
+
 import { updateRoleRequests } from "@/services/RequestRoleService";
 import { Check, X, Loader2 } from "lucide-react";
 import React, { useState } from "react";
@@ -211,6 +212,7 @@ const RoleRequestTable = ({ requests, isLoading, refetch }) => {
           );
         })}
       </div>
+
     </div>
   );
 };

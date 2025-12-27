@@ -24,9 +24,11 @@ export const getProfile = async () => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (limit = 10, skip = 0) => {
   try {
-    const response = await axiosSecureInstance.get("/users");
+    const response = await axiosSecureInstance.get(
+      `/users?limit=${limit}&skip=${skip}`
+    );
     return response.data.data;
   } catch (err) {
     throw new Error(

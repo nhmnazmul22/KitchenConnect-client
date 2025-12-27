@@ -1,7 +1,18 @@
 import { Link } from "react-router";
 import { Star, Clock, MapPin, Heart } from "lucide-react";
+import toast from "react-hot-toast";
+import { saveIntoFavorite } from "@/services/FavoriteService";
 
 const MealCard = ({ meal, isChefView = false }) => {
+  const handleFavorite = async () => {
+    const result = await saveIntoFavorite({ mealId: meal._id });
+    if (result.success) {
+      toast.success("Meal added to favorite");
+    } else {
+      toast.error(result.message || "Failed added meal into favorite");
+    }
+  };
+
   return (
     <div className="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
       <figure className="relative h-48 overflow-hidden">
@@ -12,7 +23,11 @@ const MealCard = ({ meal, isChefView = false }) => {
         />
         <div className="absolute inset-0 bg-linear-to-t from-base-content/60 to-transparent" />
         {!isChefView && (
-          <button className="btn btn-circle btn-sm btn-ghost bg-base-100/90 absolute top-3 right-3 hover:bg-primary hover:text-primary-content">
+          <button
+            onClick={handleFavorite}
+            className="btn btn-circle btn-sm btn-ghost bg-base-100/90 absolute top-3 right-3 hover:bg-primary
+           hover:text-primary-content"
+          >
             <Heart className="w-4 h-4" />
           </button>
         )}

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReviewCard from "@/components/Reviews/ReviewCard";
 import WriteReviewModal from "@/components/Reviews/WriteReviewModal";
 import { Edit2, Trash2, Loader2 } from "lucide-react";
@@ -7,20 +7,23 @@ import { useQuery } from "@tanstack/react-query";
 import { getReviews, removeReview } from "@/services/ReviewService";
 import CardSkeleton from "@/components/Fallback/CardSkeleton";
 import toast from "react-hot-toast";
+import useSearch from "@/hooks/useSearch";
+import Pagination from "@/components/common/UI/Pagination";
 
 const ReviewsPage = () => {
+  const { limit, skip, setLimit, setSkip } = useSearch();
   const modalRef = useRef(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
   const {
-    data: reviews,
+    data = { reviews: [], total: 0 },
     isLoading,
     isError,
     error,
     refetch,
   } = useQuery({
-    queryKey: ["my-reviews"],
-    queryFn: () => getReviews(),
+    queryKey: ["my-reviews", limit, skip],
+    queryFn: () => getReviews(limit, skip),
     keepPreviousData: true,
   });
 
@@ -46,6 +49,11 @@ const ReviewsPage = () => {
     }
   };
 
+  useEffect(() => {
+    setLimit(10);
+    setSkip(0);
+  }, [setLimit, setSkip]);
+
   return (
     <div>
       <DashboardPageHeader
@@ -53,18 +61,18 @@ const ReviewsPage = () => {
         subTitle="Manage your meal reviews"
       ></DashboardPageHeader>
 
-      {!reviews && isError && (
+      {(!data.reviews || isError) && (
         <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
           <p className="text-muted-foreground">
-            {error.message || "You haven't placed any orders yet."}
+            {error?.message || "You haven't placed any orders yet."}
           </p>
         </div>
       )}
 
       {!isError && (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {reviews && reviews.length > 0 && !isLoading ? (
-            reviews.map((review) => (
+          {data.reviews && data.reviews.length > 0 && !isLoading ? (
+            data.reviews.map((review) => (
               <div key={review._id} className="relative">
                 <ReviewCard review={review} showMealName />
 
@@ -100,6 +108,10 @@ const ReviewsPage = () => {
           )}
         </div>
       )}
+
+      <div className="col-span-1 sm:col-span-2 lg:col-span-3">
+        {!isError && <Pagination total={data?.total} />}
+      </div>
     </div>
   );
 };

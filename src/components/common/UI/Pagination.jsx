@@ -1,5 +1,5 @@
 import useSearch from "@/hooks/useSearch";
-import { ChevronLeft, ChevronRight, } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 const Pagination = ({ total }) => {
   const { skip, limit, setSkip } = useSearch();
   const mealsPerPage = 9;

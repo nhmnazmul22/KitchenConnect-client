@@ -2,7 +2,7 @@ import { useState } from "react";
 import MealSearchContext from "./SearchContext";
 
 const SearchContextProvider = ({ children }) => {
-  const [limit, setLimit] = useState(9);
+  const [limit, setLimit] = useState(10);
   const [skip, setSkip] = useState(0);
   const [sort, setSort] = useState("createAt");
   const [order, setOrder] = useState("desc");

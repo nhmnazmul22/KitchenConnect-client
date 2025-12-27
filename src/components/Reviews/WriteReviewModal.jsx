@@ -51,6 +51,7 @@ const WriteReviewModal = ({ ref, review, isUpdateMode = false, refetch }) => {
 
     mutation.mutate(payload);
     ref.current.close();
+    refetch();
   };
 
   const handleUpdate = async (e) => {

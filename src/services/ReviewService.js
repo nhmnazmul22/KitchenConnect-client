@@ -24,9 +24,11 @@ export const createReview = async (data) => {
   }
 };
 
-export const getReviews = async () => {
+export const getReviews = async (limit = 10, skip = 0) => {
   try {
-    const response = await axiosSecureInstance.get(`/reviews`);
+    const response = await axiosSecureInstance.get(
+      `/reviews?limit=${limit}&skip=${skip}`
+    );
     return response.data.data;
   } catch (err) {
     throw new Error(

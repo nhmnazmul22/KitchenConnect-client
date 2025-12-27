@@ -12,10 +12,12 @@ export const createOrder = async (data) => {
   }
 };
 
-export const getMyOrders = async () => {
+export const getMyOrders = async (limit = 10, skip = 0) => {
   try {
-    const response = await axiosSecureInstance.get(`/my-orders`);
-    return response.data;
+    const response = await axiosSecureInstance.get(
+      `/my-orders?limit=${limit}&skip=${skip}`
+    );
+    return response.data.data;
   } catch (err) {
     throw new Error(
       err?.response?.data?.message ||
@@ -51,9 +53,11 @@ export const updateOrderStatus = async (orderId, status) => {
   }
 };
 
-export const getOrders = async () => {
+export const getOrders = async (limit = 10, skip = 0) => {
   try {
-    const response = await axiosSecureInstance.get(`/orders`);
+    const response = await axiosSecureInstance.get(
+      `/orders?limit=${limit}&skip=${skip}`
+    );
     return response.data;
   } catch (err) {
     throw new Error(

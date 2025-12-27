@@ -8,6 +8,7 @@ const CustomerReviews = ({
   mealReviews = [],
   loading = false,
   isError = false,
+  refetch,
 }) => {
   const ModalRef = useRef(null);
   const handelShowModal = () => {
@@ -31,7 +32,7 @@ const CustomerReviews = ({
         >
           Write a Review
         </button>
-        <WriteReview ref={ModalRef}></WriteReview>
+        <WriteReview ref={ModalRef} refetch={refetch}></WriteReview>
       </div>
 
       {!loading && (isError || mealReviews.length === 0) && (
