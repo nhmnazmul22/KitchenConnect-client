@@ -1,14 +1,16 @@
-import { meals } from "@/constants";
 import { Edit2, Trash2 } from "lucide-react";
 import MealCard from "@/components/Meals/MealCard";
 import { useQuery } from "@tanstack/react-query";
 import { deleteMeal, getMyMeals } from "@/services/MealService";
 import CardSkeleton from "@/components/Fallback/CardSkeleton";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import MealUpdateModal from "@/components/Forms/MealUpdateModal";
 
 const MealList = () => {
   const [loading, setLoading] = useState(false);
+  const [meal, setMeal] = useState(null);
+  const modalRef = useRef(null);
   const {
     data = { meals: [], total: 0 },
     isLoading,
@@ -38,6 +40,13 @@ const MealList = () => {
     }
   };
 
+  const handleModalOpen = (meal) => {
+    if (meal) {
+      setMeal(meal);
+    }
+    modalRef.current.showModal();
+  };
+
   if (data?.meals?.length === 0 || isError) {
     return (
       <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
@@ -59,14 +68,19 @@ const MealList = () => {
               className="absolute inset-0 bg-neutral/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300
               rounded-2xl flex items-center justify-center gap-3"
             >
-              <button className="btn btn-sm btn-secondary">
+              <button
+                disabled={loading}
+                onClick={() => handleModalOpen(meal)}
+                className="btn btn-sm btn-secondary disabled:btn-disabled"
+              >
                 <Edit2 className="w-4 h-4 mr-2" />
                 Edit
               </button>
 
               <button
+                disabled={loading}
                 onClick={() => handleDelete(meal._id)}
-                className="btn btn-sm btn-error"
+                className="btn btn-sm btn-error disabled:btn-disabled"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
                 Delete
@@ -77,6 +91,8 @@ const MealList = () => {
       ) : (
         <CardSkeleton limit={6} />
       )}
+
+      <MealUpdateModal modalRef={modalRef} meal={meal} refetch={refetch} />
     </div>
   );
 };
