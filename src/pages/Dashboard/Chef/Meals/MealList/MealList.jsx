@@ -1,4 +1,4 @@
-import { Edit2, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Edit2, Trash2 } from "lucide-react";
 import MealCard from "@/components/Meals/MealCard";
 import { useQuery } from "@tanstack/react-query";
 import { deleteMeal, getMyMeals } from "@/services/MealService";
@@ -6,8 +6,11 @@ import CardSkeleton from "@/components/Fallback/CardSkeleton";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import MealUpdateModal from "@/components/Forms/MealUpdateModal";
+import useSearch from "@/hooks/useSearch";
+import Pagination from "@/components/common/UI/Pagination";
 
 const MealList = () => {
+  const { limit, skip } = useSearch();
   const [loading, setLoading] = useState(false);
   const [meal, setMeal] = useState(null);
   const modalRef = useRef(null);
@@ -19,7 +22,7 @@ const MealList = () => {
     refetch,
   } = useQuery({
     queryKey: ["my-meals"],
-    queryFn: () => getMyMeals(),
+    queryFn: () => getMyMeals(limit, skip),
     keepPreviousData: true,
   });
 
@@ -59,8 +62,8 @@ const MealList = () => {
 
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {data?.meals.length > 0 && !isLoading ? (
-        data?.meals.map((meal) => (
+      {data?.meals?.length > 0 && !isLoading ? (
+        data?.meals?.map((meal) => (
           <div key={meal._id} className="relative group">
             <MealCard meal={meal} isChefView />
 
@@ -91,6 +94,10 @@ const MealList = () => {
       ) : (
         <CardSkeleton limit={6} />
       )}
+
+      <div className="col-span-1 sm:col-span-2 lg:col-span-3">
+        {!isError && <Pagination total={data?.total} />}
+      </div>
 
       <MealUpdateModal modalRef={modalRef} meal={meal} refetch={refetch} />
     </div>

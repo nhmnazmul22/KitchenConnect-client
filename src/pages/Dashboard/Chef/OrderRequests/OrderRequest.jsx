@@ -1,7 +1,21 @@
 import OrderCard from "@/components/Orders/OrderCard";
-import { orders } from "@/constants";
 import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
+import { getOrders } from "@/services/OrderService";
+import { useQuery } from "@tanstack/react-query";
+import CardSkeleton from "@/components/Fallback/CardSkeleton";
+import Pagination from "@/components/common/UI/Pagination";
 const OrderRequestsPage = () => {
+  const {
+    data = { orders: [], total: 0 },
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["my-orders"],
+    queryFn: () => getOrders(),
+    keepPreviousData: true,
+  });
+
   return (
     <div className="pr-5">
       <DashboardPageHeader
@@ -9,32 +23,29 @@ const OrderRequestsPage = () => {
         subTitle="Manage incoming orders from customers"
       ></DashboardPageHeader>
 
-      <div className="flex flex-wrap max-sm:justify-center gap-2 mb-6 overflow-x-auto pb-2">
-        {["All", "Pending", "Delivered", "Cancelled"].map((tab) => (
-          <button
-            key={tab}
-            className={`btn text-sm font-medium whitespace-nowrap transition-colors ${
-              tab === "All" ? "btn-primary" : "btn-outline"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-y-5 md:gap-5">
-        {orders.map((order) => (
-          <OrderCard key={order._id} order={order} isChefView />
-        ))}
-      </div>
-
-      {orders.length === 0 && (
+      {isError && (
         <div className="text-center py-12 bg-base-100 rounded-2xl border border-base-300">
           <p className="text-muted-foreground">
-            No order requests at the moment.
+            {error?.message || "You don't have any orders yet."}
           </p>
         </div>
       )}
+
+      {!isError && (
+        <div className="grid md:grid-cols-2 gap-y-5 md:gap-5">
+          {data.orders?.length > 0 && !isLoading ? (
+            data.orders?.map((order) => (
+              <OrderCard key={order._id} order={order} isChefView />
+            ))
+          ) : (
+            <CardSkeleton limit={4} />
+          )}
+        </div>
+      )}
+
+      <div className="col-span-1 md:col-span-2">
+        {!isError && <Pagination total={data?.total} />}
+      </div>
     </div>
   );
 };

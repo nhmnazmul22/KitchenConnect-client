@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import MealList from "./MealList/MealList";
 
 const ChefMealsPage = () => {
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -21,6 +22,8 @@ const ChefMealsPage = () => {
       </div>
 
       <MealList />
+
+
     </div>
   );
 };

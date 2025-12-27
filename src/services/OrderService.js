@@ -56,10 +56,11 @@ export const getOrders = async () => {
     const response = await axiosSecureInstance.get(`/orders`);
     return response.data;
   } catch (err) {
-    return {
-      success: false,
-      message: err?.response?.data?.message || "Failed to retrieved orders",
-    };
+    throw new Error(
+      err?.response?.data?.message ||
+        err.response.statusText ||
+        "Failed to retrieved orders"
+    );
   }
 };
 
