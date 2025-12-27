@@ -58,7 +58,7 @@ export const getOrders = async (limit = 10, skip = 0) => {
     const response = await axiosSecureInstance.get(
       `/orders?limit=${limit}&skip=${skip}`
     );
-    return response.data;
+    return response.data.data;
   } catch (err) {
     throw new Error(
       err?.response?.data?.message ||

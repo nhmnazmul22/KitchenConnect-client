@@ -1,6 +1,11 @@
 import { Clock, User, CreditCard, MapPin } from "lucide-react";
 
-const OrderCard = ({ order, showActions = true, isChefView = false }) => {
+const OrderCard = ({
+  order,
+  showActions = true,
+  isChefView = false,
+  handleOrderStatusUpdate,
+}) => {
   const getStatusColor = (status) => {
     switch (status) {
       case "delivered":
@@ -10,7 +15,7 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
       case "cancelled":
         return "bg-destructive/20 text-destructive";
       default:
-        return "bg-muted text-muted-foreground";
+        return "bg-green-600/20 text-green-600";
     }
   };
 
@@ -80,15 +85,25 @@ const OrderCard = ({ order, showActions = true, isChefView = false }) => {
               <>
                 {order.orderStatus === "pending" && (
                   <>
-                    <button className="btn btn-outline btn-sm flex-1 sm:flex-none">
+                    <button
+                      onClick={() =>
+                        handleOrderStatusUpdate(order._id, "cancel")
+                      }
+                      className="btn btn-outline btn-sm flex-1 sm:flex-none"
+                    >
                       Cancel
                     </button>
-                    <button className="flex-1 btn btn-primary btn-sm sm:flex-none">
+                    <button
+                      onClick={() =>
+                        handleOrderStatusUpdate(order._id, "accepted")
+                      }
+                      className="flex-1 btn btn-primary btn-sm sm:flex-none"
+                    >
                       Accept
                     </button>
                   </>
                 )}
-                {order.orderStatus === "preparing" && (
+                {order.orderStatus === "accepted" && (
                   <button className="btn btn-primary btn-sm flex-1 sm:flex-none">
                     Mark Delivered
                   </button>

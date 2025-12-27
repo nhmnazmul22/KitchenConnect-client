@@ -1,11 +1,12 @@
 import OrderCard from "@/components/Orders/OrderCard";
 import DashboardPageHeader from "@/components/Shared/Header/DashboardPageHeader";
-import { getOrders } from "@/services/OrderService";
+import { getOrders, updateOrderStatus } from "@/services/OrderService";
 import { useQuery } from "@tanstack/react-query";
 import CardSkeleton from "@/components/Fallback/CardSkeleton";
 import Pagination from "@/components/common/UI/Pagination";
 import useSearch from "@/hooks/useSearch";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 const OrderRequestsPage = () => {
   const { limit, skip, setLimit, setSkip } = useSearch();
   const {
@@ -13,11 +14,24 @@ const OrderRequestsPage = () => {
     isLoading,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["orders", limit, skip],
     queryFn: () => getOrders(limit, skip),
     keepPreviousData: true,
   });
+
+  const handleOrderStatusUpdate = async (orderId, status) => {
+    const result = await updateOrderStatus(orderId, status);
+    if (result.success) {
+      toast.success(result.message || "Order status updated successful");
+      refetch();
+      return;
+    } else {
+      toast.error(result.message || "Order status update failed");
+      return;
+    }
+  };
 
   useEffect(() => {
     setLimit(10);
@@ -43,7 +57,12 @@ const OrderRequestsPage = () => {
         <div className="grid md:grid-cols-2 gap-y-5 md:gap-5">
           {data.orders?.length > 0 && !isLoading ? (
             data.orders?.map((order) => (
-              <OrderCard key={order._id} order={order} isChefView />
+              <OrderCard
+                key={order._id}
+                order={order}
+                isChefView
+                handleOrderStatusUpdate={handleOrderStatusUpdate}
+              />
             ))
           ) : (
             <CardSkeleton limit={4} />
