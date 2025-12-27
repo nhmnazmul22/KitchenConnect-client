@@ -20,8 +20,7 @@ const LoginForm = () => {
 
   const handleLoginSubmit = async (data) => {
     try {
-      const result = await signinUser(data.email, data.password);
-      console.log(result);
+      await signinUser(data.email, data.password);
       reset();
       navigate(location.state || "/");
     } catch (err) {
@@ -57,7 +56,7 @@ const LoginForm = () => {
         <label className="label mb-1">Password</label>
         <div
           className="input gap-2 w-full focus-within:outline-none focus-within:border-neutral-300
-          focus-within:shadow-sm flex items-center"
+          focus-within:shadow-none flex items-center"
         >
           <Input
             type={showPassword ? "text" : "password"}

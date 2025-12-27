@@ -195,8 +195,8 @@ const RegisterForm = () => {
       <div className="form-control">
         <label className="label">Password</label>
         <div
-          className="input gap-2 w-full focus-within:outline-none
-              focus-within:border-neutral-300 focus-within:shadow-smflex items-center"
+          className="input gap-2 w-full focus-within:outline-none focus-within:border-neutral-300
+          focus-within:shadow-none flex items-center"
         >
           <Input
             type={showPassword ? "text" : "password"}
@@ -234,8 +234,8 @@ const RegisterForm = () => {
       <div className="form-control">
         <label className="label">Confirm Password</label>
         <div
-          className="input gap-2 w-full focus-within:outline-none
-              focus-within:border-neutral-300 focus-within:shadow-sm flex items-center"
+          className="input gap-2 w-full focus-within:outline-none focus-within:border-neutral-300
+          focus-within:shadow-none flex items-center"
         >
           <Input
             type={showConfirmPassword ? "text" : "password"}
