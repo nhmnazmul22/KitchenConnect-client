@@ -1,4 +1,6 @@
-import { Clock, User, CreditCard, MapPin } from "lucide-react";
+import { makePayment } from "@/services/PaymentService";
+import { User, CreditCard, MapPin } from "lucide-react";
+import toast from "react-hot-toast";
 
 const OrderCard = ({
   order,
@@ -23,6 +25,17 @@ const OrderCard = ({
     return status === "paid"
       ? "bg-secondary/20 text-secondary"
       : "bg-primary/20 text-primary";
+  };
+
+  const handleMakePayment = async (orderId) => {
+    const result = await makePayment({ orderId: orderId });
+    if (result.success) {
+      window.location.href = result.data.redirectUrl;
+      return;
+    } else {
+      toast.error(result.message || "Order status update failed");
+      return;
+    }
   };
 
   return (
@@ -112,12 +125,12 @@ const OrderCard = ({
             ) : (
               <>
                 {order.paymentStatus === "pending" && (
-                  <button className="btn btn-secondary btn-shine">
+                  <button
+                    onClick={() => handleMakePayment(order._id)}
+                    className="btn btn-secondary btn-shine"
+                  >
                     Pay Now
                   </button>
-                )}
-                {order.orderStatus === "delivered" && (
-                  <button className="btn btn-outline">Leave Review</button>
                 )}
               </>
             )}

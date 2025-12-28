@@ -24,6 +24,9 @@ import PrivateRoute from "./PrivateRoute";
 import UserRoute from "./UserRoute";
 import ChefRoute from "./ChefRoute";
 import AdminRoute from "./AdminRoute";
+import SuccessPage from "@/pages/Payments/Success/SuccessPage";
+import FailedPage from "@/pages/Payments/Failed/FailedPage";
+import CancelPage from "@/pages/Payments/Cancel/CancelPage";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +53,36 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <UserRoute>
               <CreateOrderPage></CreateOrderPage>
+            </UserRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment-success",
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <SuccessPage></SuccessPage>
+            </UserRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment-failed",
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <FailedPage></FailedPage>
+            </UserRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment-cancel",
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <CancelPage></CancelPage>
             </UserRoute>
           </PrivateRoute>
         ),
