@@ -1,6 +1,6 @@
-# 🍽️ LocalChefBazaar — Frontend
+# 🍽️ KitchenConnect — Frontend
 
-LocalChefBazaar is a modern web application that connects local home chefs with customers looking for fresh, homemade meals.
+KitchenConnect is a modern web application that connects local home chefs with customers looking for fresh, homemade meals.
 This frontend is built using **React + Vite** and focuses on **performance**, **clean UI**, and **role-based user experience**.
 
 ---
@@ -13,7 +13,7 @@ This frontend is built using **React + Vite** and focuses on **performance**, **
 
 ## 🎯 Purpose of the Project
 
-The goal of **LocalChefBazaar** is to:
+The goal of **KitchenConnect** is to:
 
 - 🍳 Help home cooks earn by selling homemade meals
 - 🛒 Allow users to browse daily meals, order food, and track orders
@@ -195,10 +195,9 @@ Admin Password: @Testchef123
 Admin Email: testuser123@gmail.com
 Admin Password: @Testuser123
 
-
 ## 👨‍💻 Developer
-Name: Nhm Nazmul
-Project: LocalChefBazaar
 
+Name: Nhm Nazmul
+Project: KitchenConnect
 
 ### Please, support me to give start

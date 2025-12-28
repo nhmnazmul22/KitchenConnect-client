@@ -21,7 +21,7 @@ const RegisterPage = () => {
             </h2>
             <p className="text-secondary-content/80 text-lg max-w-md">
               Whether you're a passionate home chef or a food lover, there's a
-              place for you at LocalChefBazaar.
+              place for you at KitchenConnect.
             </p>
           </div>
         </div>

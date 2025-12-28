@@ -109,7 +109,7 @@ export const monthNames = [
   "Dec",
 ];
 
-// Static mock data for LocalChefBazaar
+// Static mock data for KitchenConnect
 export const meals = [
   {
     _id: "meal001",
@@ -462,7 +462,7 @@ export const users = [
   {
     _id: "user003",
     name: "Admin Sarah",
-    email: "admin@localchefbazaar.com",
+    email: "admin@KitchenConnect.com",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100",
     address: "789 Admin Blvd",
     role: "admin",

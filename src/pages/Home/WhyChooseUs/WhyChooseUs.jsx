@@ -16,7 +16,7 @@ const WhyChooseUs = () => {
             Why Choose Us
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold mt-2">
-            The LocalChefBazaar Difference
+            The KitchenConnect Difference
           </h2>
         </motion.div>
 
