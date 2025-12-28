@@ -27,12 +27,13 @@ import AdminRoute from "./AdminRoute";
 import SuccessPage from "@/pages/Payments/Success/SuccessPage";
 import FailedPage from "@/pages/Payments/Failed/FailedPage";
 import CancelPage from "@/pages/Payments/Cancel/CancelPage";
+import { ErrorBoundary } from "@/pages/Errors/ErrorBoundary";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
-    ErrorBoundary: <div>Error page</div>,
+    errorElement: <ErrorBoundary></ErrorBoundary>,
     children: [
       {
         index: true,

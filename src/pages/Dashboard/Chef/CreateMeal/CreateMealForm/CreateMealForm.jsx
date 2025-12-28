@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import useAuth from "@/hooks/useAuth";
 import { uploadFile } from "@/lib/fileUploadHelper";
 import { createMeal } from "@/services/MealService";
+import Swal from "sweetalert2";
 
 const CreateMealForm = () => {
   const { userProfile } = useAuth();
@@ -36,6 +37,15 @@ const CreateMealForm = () => {
   };
 
   const handleCreateMeal = async (data) => {
+    if (userProfile.status === "fraud") {
+      Swal.fire({
+        title: "Sorry, You can't create new meal.",
+        text: "Your account status is fraud. Please contact system administration fro this issue. Thank you!",
+        icon: "error",
+      });
+      return;
+    }
+
     try {
       let mealImage = data.mealImage;
 

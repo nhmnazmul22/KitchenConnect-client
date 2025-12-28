@@ -1,7 +1,5 @@
 import { motion } from "motion/react";
-import { ShoppingCart, CreditCard, MapPin, Clock, ChefHat } from "lucide-react";
-import { useEffect, useState } from "react";
-import { meals } from "../../constants";
+import { ShoppingCart } from "lucide-react";
 import OrderForm from "./OrderForm/OrderForm";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
@@ -11,8 +9,8 @@ import { getMealDetails } from "@/services/MealService";
 import { useForm, useWatch } from "react-hook-form";
 import useAuth from "@/hooks/useAuth";
 import { createOrder } from "@/services/OrderService";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const OrderPage = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -39,6 +37,15 @@ const OrderPage = () => {
   });
 
   const handleOrderSubmit = async (data) => {
+    if (userProfile.status === "fraud") {
+      Swal.fire({
+        title: "Sorry, You can't order now.",
+        text: "Your account status is fraud. Please contact system administration fro this issue. Thank you!",
+        icon: "error",
+      });
+      return;
+    }
+
     Swal.fire({
       title: "Do you want to confirm the order?",
       text: `Your total price is ${
