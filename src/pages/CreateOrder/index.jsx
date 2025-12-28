@@ -12,6 +12,7 @@ import { useForm, useWatch } from "react-hook-form";
 import useAuth from "@/hooks/useAuth";
 import { createOrder } from "@/services/OrderService";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const OrderPage = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -38,24 +39,44 @@ const OrderPage = () => {
   });
 
   const handleOrderSubmit = async (data) => {
-    const payload = {
-      mealId: selectedMeal._id || null,
-      quantity: Number(data.quantity || 1),
-      userAddress: data.userAddress || "",
-    };
-    const result = await createOrder(payload);
-    if (result.success) {
-      toast.success(
-        result.message || "Order create successful, Please pay now."
-      );
-      reset({
-        quantity: 1,
-        userAddress: "",
-      });
-      navigate("/dashboard/orders");
-    } else {
-      toast.error(result.message || "Order create failed, Please try again.");
-    }
+    Swal.fire({
+      title: "Do you want to confirm the order?",
+      text: `Your total price is ${
+        Number(selectedMeal?.price ?? 0) * quantity
+      }.`,
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#22bb33",
+      cancelButtonColor: "#aaaaaa",
+      confirmButtonText: "Yes, Confirm it",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const payload = {
+          mealId: selectedMeal._id || null,
+          quantity: Number(data.quantity || 1),
+          userAddress: data.userAddress || "",
+        };
+        const result = await createOrder(payload);
+        if (result.success) {
+          Swal.fire({
+            title: "Order Successful!",
+            text: result.message || "Order create successful, Please pay now.",
+            icon: "success",
+          });
+          reset({
+            quantity: 1,
+            userAddress: "",
+          });
+          navigate("/dashboard/orders");
+        } else {
+          Swal.fire({
+            title: "Order failed! Try again.",
+            text: result.message || "Order create failed, Please try again.",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
 
   const quantity = Number(useWatch({ control, name: "quantity" }) || 1);
