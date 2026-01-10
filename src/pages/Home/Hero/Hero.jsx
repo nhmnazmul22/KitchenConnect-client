@@ -44,7 +44,7 @@ const Hero = () => {
                 Explore Meals
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/register" className="btn btn-outline btn-lg">
+              <Link to="/auth/register" className="btn btn-outline btn-lg">
                 Become a Chef
               </Link>
             </div>
