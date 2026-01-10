@@ -46,7 +46,7 @@ const Navbar = () => {
                 {userProfile.role === "user" && (
                   <>
                     <Link
-                      to="/favorites"
+                      to="/dashboard/favorites"
                       className="btn btn-ghost btn-circle btn-sm"
                     >
                       <Heart className="w-5 h-5" />
