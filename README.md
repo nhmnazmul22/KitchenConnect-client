@@ -7,7 +7,7 @@ This frontend is built using **React + Vite** and focuses on **performance**, **
 
 ## 🔗 Live Website
 
-👉 **Live URL:** https://your-live-client-url.com
+👉 **Live URL:** [https://kitchenconnect-a145a.web.app](https://kitchenconnect-a145a.web.app)
 
 ---
 
